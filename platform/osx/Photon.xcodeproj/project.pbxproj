@@ -141,8 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				5DC84A6B1DA51346008E7EE3 /* lib */,
-				5DC84A651DA4E322008E7EE3 /* images */,
-				5D5C65C21D7BD67C002197F8 /* fonts */,
+				5DC84A6C1DA515D0008E7EE3 /* assets */,
 				5D565ECB1D605F5D00FD087C /* Photon */,
 				5D565ECA1D605F5D00FD087C /* Products */,
 			);
@@ -252,6 +251,15 @@
 				5DC84A691DA5132D008E7EE3 /* libcairo.a */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		5DC84A6C1DA515D0008E7EE3 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				5DC84A651DA4E322008E7EE3 /* images */,
+				5D5C65C21D7BD67C002197F8 /* fonts */,
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

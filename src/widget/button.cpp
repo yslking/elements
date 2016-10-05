@@ -11,7 +11,7 @@ namespace photon
 {
    ////////////////////////////////////////////////////////////////////////////////////////////////
    // Momentary Button
-   ////////////////////////////////////////////////////////////////////////////////////////////////   widget* basic_latching_button::click(context const& ctx, mouse_button btn)
+   ////////////////////////////////////////////////////////////////////////////////////////////////
    widget* basic_button::hit_test(context const& ctx, point p)
    {
       if (ctx.bounds.includes(p))
@@ -63,7 +63,7 @@ namespace photon
       if (on_click && _state != new_state)
          on_click(_state);
    }
-   
+
    void basic_button::value(int new_state)
    {
       value(bool(new_state));
