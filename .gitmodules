@@ -7,3 +7,6 @@
 [submodule "libs/json_spirit"]
 	path = libs/json_spirit
 	url = git@github.com:cierelabs/json_spirit.git
+[submodule "lib/libui"]
+	path = lib/libui
+	url = git@github.com:andlabs/libui.git
