@@ -103,7 +103,7 @@ namespace cycfi { namespace elements
       );
    }
 
-   float glyphs::width() const
+   double glyphs::width() const
    {
       if (_first == _last)
          return 0;
@@ -128,16 +128,16 @@ namespace cycfi { namespace elements
       cairo_scaled_font_extents(_scaled_font, &font_extents);
 
       return {
-         /*ascent=*/    float(font_extents.ascent),
-         /*descent=*/   float(font_extents.descent),
-         /*leading=*/   float(font_extents.height-(font_extents.ascent + font_extents.descent)),
+         /*ascent=*/    font_extents.ascent,
+         /*descent=*/   font_extents.descent,
+         /*leading=*/   font_extents.height-(font_extents.ascent + font_extents.descent),
       };
    }
 
    ////////////////////////////////////////////////////////////////////////////
    master_glyphs::master_glyphs(
        char const* first, char const* last
-     , font font_, float size
+     , font font_, double size
      , point start
    )
     : glyphs(first, last)
@@ -229,7 +229,7 @@ namespace cycfi { namespace elements
       build(start);
    }
 
-   void master_glyphs::break_lines(float width, std::vector<glyphs>& lines)
+   void master_glyphs::break_lines(double width, std::vector<glyphs>& lines)
    {
       CYCFI_ASSERT(_scaled_font, "Precondition failure: _scaled_font must not be null");
 
@@ -247,7 +247,7 @@ namespace cycfi { namespace elements
       int         start_cluster_index = 0;
       int         space_glyph_index = 0;
       int         space_cluster_index = 0;
-      float       start_x = _glyphs->x;
+      double       start_x = _glyphs->x;
 
       auto add_line = [&]()
       {

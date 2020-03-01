@@ -8,24 +8,24 @@
 
 namespace cycfi { namespace elements
 {
-   void draw_icon(canvas& cnv, rect const& bounds, uint32_t code, float size, color c)
+   void draw_icon(canvas& cnv, rect const& bounds, uint32_t code, double size, color c)
    {
-      auto  state = cnv.new_state();
-      auto& thm = get_theme();
-      float cx = bounds.left + (bounds.width() / 2);
-      float cy = bounds.top + (bounds.height() / 2);
+      auto     state = cnv.new_state();
+      auto&    thm = get_theme();
+      double   cx = bounds.left + (bounds.width() / 2);
+      double   cy = bounds.top + (bounds.height() / 2);
       cnv.font(thm.icon_font, size);
       cnv.fill_style(c);
       cnv.text_align(cnv.middle | cnv.center);
       cnv.fill_text(point{ cx, cy }, codepoint_to_utf8(code).c_str());
    }
 
-   void draw_icon(canvas& cnv, rect const& bounds, uint32_t code, float size)
+   void draw_icon(canvas& cnv, rect const& bounds, uint32_t code, double size)
    {
       draw_icon(cnv, bounds, code, size, get_theme().icon_color);
    }
 
-   point measure_icon(canvas& cnv, uint32_t cp, float size)
+   point measure_icon(canvas& cnv, uint32_t cp, double size)
    {
       auto  state = cnv.new_state();
       auto& thm = get_theme();
@@ -33,7 +33,7 @@ namespace cycfi { namespace elements
       return cnv.measure_text(codepoint_to_utf8(cp).c_str()).size;
    }
 
-   point measure_text(canvas& cnv, char const* text, font const& font_, float size)
+   point measure_text(canvas& cnv, char const* text, font const& font_, double size)
    {
       auto  state = cnv.new_state();
       cnv.font(font_, size);

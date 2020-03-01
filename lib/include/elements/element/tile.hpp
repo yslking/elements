@@ -24,9 +24,9 @@ namespace cycfi { namespace elements
 
    private:
 
-      std::vector<float>      _tiles;
-      float                   _left;
-      float                   _right;
+      std::vector<double>     _tiles;
+      double                  _left;
+      double                  _right;
    };
 
    using vtile_composite = vector_composite<vtile_element>;
@@ -54,9 +54,9 @@ namespace cycfi { namespace elements
 
    private:
 
-      std::vector<float>      _tiles;
-      float                   _top;
-      float                   _bottom;
+      std::vector<double>     _tiles;
+      double                  _top;
+      double                  _bottom;
    };
 
    using htile_composite = vector_composite<htile_element>;

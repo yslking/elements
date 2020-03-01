@@ -198,8 +198,8 @@ namespace cycfi { namespace elements
       RECT frame;
       GetWindowRect(_window, &frame);
       return {
-         float((frame.right - frame.left) / scale),
-         float((frame.bottom - frame.top) / scale)
+         double((frame.right - frame.left) / scale),
+         double((frame.bottom - frame.top) / scale)
       };
    }
 
@@ -242,7 +242,7 @@ namespace cycfi { namespace elements
       auto scale = GetDpiForWindow(_window) / 96.0;
       RECT frame;
       GetWindowRect(_window, &frame);
-      return { float(frame.left / scale), float(frame.top / scale) };
+      return { double(frame.left / scale), double(frame.top / scale) };
    }
 
    void window::position(point const& p)

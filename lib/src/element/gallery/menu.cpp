@@ -31,7 +31,7 @@ namespace cycfi { namespace elements
       return menu;
    }
 
-   basic_menu icon_menu(uint32_t code, float size, menu_position pos)
+   basic_menu icon_menu(uint32_t code, double size, menu_position pos)
    {
       auto menu = text_button<basic_menu>(code, size, /*no_frame*/ true);
       menu.position(pos);
@@ -47,7 +47,7 @@ namespace cycfi { namespace elements
    void menu_item_spacer_element::draw(context const& ctx)
    {
       auto& canvas_ = ctx.canvas;
-      float y = ctx.bounds.top + ctx.bounds.height() / 2;
+      double y = ctx.bounds.top + ctx.bounds.height() / 2;
 
       canvas_.begin_path();
       canvas_.move_to({ ctx.bounds.left, y });

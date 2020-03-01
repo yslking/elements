@@ -60,7 +60,7 @@ namespace cycfi { namespace elements
          rtrim(s);
       }
 
-      inline float lerp(float a, float b, float f)
+      inline double lerp(double a, double b, double f)
       {
          return (a * (1.0 - f)) + (b * f);
       }

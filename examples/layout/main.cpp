@@ -158,7 +158,7 @@ auto make_flow()
       auto w = min_size + ((double(std::rand()) * (max_width - min_size)) / RAND_MAX);
       auto h = min_size + ((double(std::rand()) * (max_height - min_size)) / RAND_MAX);
       auto _box = vsize(line_height, align_bottom(margin(
-         { 5, 5, 5, 5 }, fixed_size({ float(w), float(h) }, rbox_)
+         { 5, 5, 5, 5 }, fixed_size({ w, h }, rbox_)
       )));
       c.push_back(share(_box));
    }

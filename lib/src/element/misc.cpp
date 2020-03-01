@@ -30,13 +30,13 @@ namespace cycfi { namespace elements
       canvas_.stroke_round_rect(bounds, theme_.frame_corner_radius);
    }
 
-   heading::heading(std::string text, float size)
+   heading::heading(std::string text, double size)
     : _text(std::move(text))
     , _font(get_theme().heading_font)
     , _size(size)
    {}
 
-   heading::heading(std::string text, elements::font font_, float size)
+   heading::heading(std::string text, elements::font font_, double size)
     : _text(std::move(text))
     , _font(font_)
     , _size(size)
@@ -66,8 +66,8 @@ namespace cycfi { namespace elements
       );
       canvas_.text_align(canvas_.middle | canvas_.center);
 
-      float cx = ctx.bounds.left + (ctx.bounds.width() / 2);
-      float cy = ctx.bounds.top + (ctx.bounds.height() / 2);
+      double cx = ctx.bounds.left + (ctx.bounds.width() / 2);
+      double cy = ctx.bounds.top + (ctx.bounds.height() / 2);
 
       canvas_.fill_text(point{ cx, cy }, _text.c_str());
    }
@@ -77,13 +77,13 @@ namespace cycfi { namespace elements
       draw_box_vgradient(ctx.canvas, ctx.bounds, 4.0);
    }
 
-   label::label(std::string text, float size)
+   label::label(std::string text, double size)
     : _text(std::move(text))
     , _font(get_theme().label_font)
     , _size(size)
    {}
 
-   label::label(std::string text, elements::font font_, float size)
+   label::label(std::string text, elements::font font_, double size)
     : _text(std::move(text))
     , _font(font_)
     , _size(size)
@@ -113,8 +113,8 @@ namespace cycfi { namespace elements
       );
       canvas_.text_align(canvas_.middle | canvas_.center);
 
-      float cx = ctx.bounds.left + (ctx.bounds.width() / 2);
-      float cy = ctx.bounds.top + (ctx.bounds.height() / 2);
+      double cx = ctx.bounds.left + (ctx.bounds.width() / 2);
+      double cy = ctx.bounds.top + (ctx.bounds.height() / 2);
 
       canvas_.fill_text(point{ cx, cy }, _text.c_str());
    }
@@ -125,8 +125,8 @@ namespace cycfi { namespace elements
       auto&          canvas_ = ctx.canvas;
       auto const&    bounds = ctx.bounds;
 
-      float pos = bounds.top;
-      float incr = bounds.height() / _major_divisions;
+      double pos = bounds.top;
+      double incr = bounds.height() / _major_divisions;
 
       canvas_.stroke_style(theme_.major_grid_color);
       canvas_.line_width(theme_.major_grid_width);
@@ -152,7 +152,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   icon::icon(std::uint32_t code_, float size_)
+   icon::icon(std::uint32_t code_, double size_)
     : _code(code_)
     , _size(size_)
    {}
@@ -160,7 +160,7 @@ namespace cycfi { namespace elements
    view_limits icon::limits(basic_context const& ctx) const
    {
       auto& thm = get_theme();
-      float font_size = thm.icon_font_size * _size;
+      double font_size = thm.icon_font_size * _size;
       point s = measure_icon(ctx.canvas, _code, font_size);
       return { { s.x, s.y }, { s.x, s.y } };
    }
@@ -168,7 +168,7 @@ namespace cycfi { namespace elements
    void icon::draw(context const& ctx)
    {
       auto& thm = get_theme();
-      float font_size = thm.icon_font_size * _size;
+      double font_size = thm.icon_font_size * _size;
       draw_icon(ctx.canvas, ctx.bounds, _code, font_size);
    }
 }}

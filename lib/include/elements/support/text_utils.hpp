@@ -14,10 +14,10 @@
 namespace cycfi { namespace elements
 {
    ////////////////////////////////////////////////////////////////////////////
-   void           draw_icon(canvas& cnv, rect const& bounds, uint32_t code, float size);
-   void           draw_icon(canvas& cnv, rect const& bounds, uint32_t code, float size, color c);
-   point          measure_icon(canvas& cnv, uint32_t cp, float size);
-   point          measure_text(canvas& cnv, char const* text, font const& font_, float size);
+   void           draw_icon(canvas& cnv, rect const& bounds, uint32_t code, double size);
+   void           draw_icon(canvas& cnv, rect const& bounds, uint32_t code, double size, color c);
+   point          measure_icon(canvas& cnv, uint32_t cp, double size);
+   point          measure_text(canvas& cnv, char const* text, font const& font_, double size);
    std::string    codepoint_to_utf8(unsigned codepoint);
    bool           is_space(unsigned codepoint);
    bool           is_newline(unsigned codepoint);

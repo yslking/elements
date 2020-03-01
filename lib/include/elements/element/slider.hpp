@@ -186,7 +186,7 @@ namespace cycfi { namespace elements
    inline view_limits basic_thumb_element<size>
       ::limits(basic_context const& ctx) const
    {
-	  auto pt = point{ float(size), float(size) };
+	  auto pt = point{ size, size };
 	  return view_limits{ pt, pt };
    }
 
@@ -215,9 +215,9 @@ namespace cycfi { namespace elements
    {
    public:
 
-      static unsigned const size = _size;
-      static bool const vertical = _vertical;
-      static unsigned const min_length = 64;
+      static constexpr double size = _size;
+      static constexpr bool const vertical = _vertical;
+      static constexpr double min_length = 64;
 
                               basic_track_element(color c = colors::black)
                                : _color(c)
@@ -235,8 +235,8 @@ namespace cycfi { namespace elements
    inline view_limits basic_track_element<size, vertical>
       ::limits(basic_context const& ctx) const
    {
-	  auto sz = float(size);
-	  auto min_length_ = float(min_length);
+	  auto sz = size;
+	  auto min_length_ = min_length;
 	  auto p1 = vertical ? point{ sz, min_length_ } : point{ min_length_, sz };
 	  auto p2 = vertical ? point{ sz, full_extent } : point{ full_extent, sz };
 	  return view_limits{ p1, p2 };
@@ -327,7 +327,7 @@ namespace cycfi { namespace elements
    };
 
    void draw_slider_marks(
-      canvas& cnv, rect const& bounds, float size, std::size_t major_divs
+      canvas& cnv, rect const& bounds, double size, std::size_t major_divs
     , std::size_t minor_divs, color c);
 
    template <
@@ -370,7 +370,7 @@ namespace cycfi { namespace elements
 
                               slider_labels_element(
                                  Subject&& subject
-                               , float font_size
+                               , double font_size
                               )
                                : base_type(std::forward<Subject>(subject))
                                , _font_size(font_size)
@@ -379,14 +379,14 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
 
       string_array            _labels;
-      float                   _font_size;
+      double                  _font_size;
    };
 
    void draw_slider_labels(
       canvas& cnv
     , rect bounds
-    , float size
-    , float font_size
+    , double size
+    , double font_size
     , std::string const labels[]
     , std::size_t _num_labels
    );
@@ -406,7 +406,7 @@ namespace cycfi { namespace elements
 
    template <int size, typename Subject, typename... S>
    inline slider_labels_element<size, Subject, sizeof...(S)>
-   slider_labels(Subject&& subject, float font_size, S&&... s)
+   slider_labels(Subject&& subject, double font_size, S&&... s)
    {
       auto r = slider_labels_element<size, Subject, sizeof...(S)>
          {std::forward<Subject>(subject), font_size};

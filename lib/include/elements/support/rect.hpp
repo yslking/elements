@@ -16,11 +16,11 @@ namespace cycfi { namespace elements
    struct rect
    {
       constexpr         rect();
-      constexpr         rect(float left, float top, float right, float bottom);
-      constexpr         rect(point const& origin, float right, float bottom)
+      constexpr         rect(double left, double top, double right, double bottom);
+      constexpr         rect(point const& origin, double right, double bottom)
                          : rect(origin.x, origin.y, right, bottom)
                         {}
-      constexpr         rect(float left, float top, extent size)
+      constexpr         rect(double left, double top, extent size)
                          : rect(left, top, left + size.x, top + size.y)
                         {}
       constexpr         rect(point const& origin, extent size)
@@ -37,24 +37,24 @@ namespace cycfi { namespace elements
       constexpr bool    includes(point const& p) const;
       constexpr bool    includes(rect const& other) const;
 
-      constexpr float   width() const;
-      constexpr void    width(float width_);
-      constexpr float   height() const;
-      constexpr void    height(float height_);
+      constexpr double  width() const;
+      constexpr void    width(double width_);
+      constexpr double  height() const;
+      constexpr void    height(double height_);
 
       constexpr point   top_left() const;
       constexpr point   bottom_right() const;
       constexpr point   top_right() const;
       constexpr point   bottom_left() const;
 
-      constexpr rect    move(float dx, float dy) const;
-      constexpr rect    move_to(float x, float y) const;
-      constexpr rect    inset(float x_inset = 1.0, float y_inset = 1.0) const;
+      constexpr rect    move(double dx, double dy) const;
+      constexpr rect    move_to(double x, double y) const;
+      constexpr rect    inset(double x_inset = 1.0, double y_inset = 1.0) const;
 
-      float             left;
-      float             top;
-      float             right;
-      float             bottom;
+      double            left;
+      double            top;
+      double            right;
+      double            bottom;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -65,7 +65,7 @@ namespace cycfi { namespace elements
    bool                 intersects(rect const& a, rect const& b);
 
    constexpr point      center_point(rect const& r);
-   constexpr float      area(rect const& r);
+   constexpr double     area(rect const& r);
    rect                 max(rect const& a, rect const& b);
    rect                 min(rect const& a, rect const& b);
 
@@ -73,9 +73,9 @@ namespace cycfi { namespace elements
    rect                 center(rect const& r, rect const& encl);
    rect                 center_h(rect const& r, rect const& encl);
    rect                 center_v(rect const& r, rect const& encl);
-   rect                 align(rect const& r, rect const& encl, float x_align, float y_align);
-   rect                 align_h(rect const& r, rect const& encl, float x_align);
-   rect                 align_v(rect const& r, rect const& encl, float y_align);
+   rect                 align(rect const& r, rect const& encl, double x_align, double y_align);
+   rect                 align_h(rect const& r, rect const& encl, double x_align);
+   rect                 align_v(rect const& r, rect const& encl, double y_align);
    rect                 clip(rect const& r, rect const& encl);
 
    ////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ namespace cycfi { namespace elements
     : left(0.0), top(0.0), right(0.0), bottom(0.0)
    {}
 
-   constexpr rect::rect(float left, float top, float right, float bottom)
+   constexpr rect::rect(double left, double top, double right, double bottom)
     : left(left), top(top), right(right), bottom(bottom)
    {}
 
@@ -125,22 +125,22 @@ namespace cycfi { namespace elements
          ;
    }
 
-   constexpr float rect::width() const
+   constexpr double rect::width() const
    {
       return right - left;
    }
 
-   constexpr void rect::width(float width_)
+   constexpr void rect::width(double width_)
    {
       right = left + width_;
    }
 
-   constexpr float rect::height() const
+   constexpr double rect::height() const
    {
       return (bottom - top);
    }
 
-   constexpr void rect::height(float height_)
+   constexpr void rect::height(double height_)
    {
       bottom = top + height_;
    }
@@ -165,7 +165,7 @@ namespace cycfi { namespace elements
       return { left, bottom };
    }
 
-   constexpr rect rect::move(float dx, float dy) const
+   constexpr rect rect::move(double dx, double dy) const
    {
       rect r = *this;
       r.top += dy;
@@ -175,12 +175,12 @@ namespace cycfi { namespace elements
       return r;
    }
 
-   constexpr rect rect::move_to(float x, float y) const
+   constexpr rect rect::move_to(double x, double y) const
    {
       return move(x-left, y-top);
    }
 
-   constexpr rect rect::inset(float x_inset, float y_inset) const
+   constexpr rect rect::inset(double x_inset, double y_inset) const
    {
       rect r = *this;
       r.top += y_inset;
@@ -209,7 +209,7 @@ namespace cycfi { namespace elements
       return { r.left + (r.width() / 2.0f), r.top + (r.height() / 2.0f) };
    }
 
-   constexpr float area(rect const& r)
+   constexpr double area(rect const& r)
    {
       return r.width() * r.height();
    }

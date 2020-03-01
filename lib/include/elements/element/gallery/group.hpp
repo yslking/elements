@@ -35,7 +35,7 @@ namespace cycfi { namespace elements
    inline auto group(
       std::string       title,
       Content&&         content,
-      float             label_size = 1.0,
+      double             label_size = 1.0,
       bool              center_heading = true
    )
    {
@@ -64,7 +64,7 @@ namespace cycfi { namespace elements
    inline auto unframed_group(
       std::string    title,
       Content&&      content,
-      float          label_size = 1.0,
+      double          label_size = 1.0,
       bool           center_heading = true
    )
    {

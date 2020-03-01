@@ -32,7 +32,7 @@ namespace cycfi { namespace elements
 
    basic_menu icon_menu(
       uint32_t code
-    , float size
+    , double size
     , menu_position pos = menu_position::bottom_right
    );
 

@@ -11,12 +11,12 @@ namespace cycfi { namespace elements
      context const& ctx, std::string const& text, bool state, bool hilite
    )
    {
-      auto&       canvas_ = ctx.canvas;
-      auto        canvas_state = canvas_.new_state();
-      auto const& theme_ = get_theme();
-      color const indicator_color = theme_.indicator_color;
-      float const bg_alfa = theme_.box_widget_bg_opacity;
-      rect        box = ctx.bounds.move(15, 0);
+      auto&          canvas_ = ctx.canvas;
+      auto           canvas_state = canvas_.new_state();
+      auto const&    theme_ = get_theme();
+      color const    indicator_color = theme_.indicator_color;
+      double const   bg_alfa = theme_.box_widget_bg_opacity;
+      rect           box = ctx.bounds.move(15, 0);
 
       box.width(box.height());
 
@@ -42,8 +42,8 @@ namespace cycfi { namespace elements
          theme_.label_font_size
       );
       canvas_.text_align(canvas_.left | canvas_.middle);
-      float cx = box.right + 10;
-      float cy = ctx.bounds.top + (ctx.bounds.height() / 2);
+      double cx = box.right + 10;
+      double cy = ctx.bounds.top + (ctx.bounds.height() / 2);
       canvas_.fill_text(point{ cx, cy }, text.c_str());
    }
 }}

@@ -42,7 +42,7 @@ namespace cycfi { namespace elements
    inline auto input_box(
       std::string placeholder
     , font font_
-    , float size // ratio relative to get_theme().text_box_font_size
+    , double size // ratio relative to get_theme().text_box_font_size
    )
    {
       auto font_size = get_theme().text_box_font_size * size;
@@ -56,7 +56,7 @@ namespace cycfi { namespace elements
 
    inline auto input_box(
       std::string placeholder
-    , float size // ratio relative to get_theme().text_box_font_size
+    , double size // ratio relative to get_theme().text_box_font_size
    )
    {
       return input_box(std::move(placeholder), get_theme().text_box_font, size);
@@ -67,7 +67,7 @@ namespace cycfi { namespace elements
       return input_box(std::move(placeholder), get_theme().text_box_font, 1.0);
    }
 
-   inline auto input_box(float size = 1.0)   // ratio relative to get_theme().text_box_font_size
+   inline auto input_box(double size = 1.0)   // ratio relative to get_theme().text_box_font_size
    {
       return input_box("", get_theme().text_box_font, size);
    }

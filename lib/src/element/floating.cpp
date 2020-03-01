@@ -18,8 +18,8 @@ namespace cycfi { namespace elements
    {
       ctx.bounds = this->bounds();
       auto  e_limits = this->subject().limits(ctx);
-      float w = ctx.bounds.width();
-      float h = ctx.bounds.height();
+      double w = ctx.bounds.width();
+      double h = ctx.bounds.height();
 
       if (w < e_limits.min.x)
          ctx.bounds.width(e_limits.min.x);

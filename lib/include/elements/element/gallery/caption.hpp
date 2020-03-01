@@ -17,7 +17,7 @@ namespace cycfi { namespace elements
    // Captions
    ////////////////////////////////////////////////////////////////////////////
    template <typename Content>
-   inline auto simple_heading(Content&& content, std::string title, float size = 1.0)
+   inline auto simple_heading(Content&& content, std::string title, double size = 1.0)
    {
       return
          vtile(
@@ -27,7 +27,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Content>
-   inline auto caption(Content&& content, std::string title, float size = 1.0)
+   inline auto caption(Content&& content, std::string title, double size = 1.0)
    {
       return
          vtile(
@@ -37,7 +37,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Content>
-   inline auto left_caption(Content&& content, std::string title, float size = 1.0)
+   inline auto left_caption(Content&& content, std::string title, double size = 1.0)
    {
       return
          htile(
@@ -47,7 +47,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Content>
-   inline auto top_caption(Content&& content, std::string title, float size = 1.0)
+   inline auto top_caption(Content&& content, std::string title, double size = 1.0)
    {
       return
          vtile(

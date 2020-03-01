@@ -14,7 +14,7 @@
 
 namespace cycfi { namespace elements
 {
-   pixmap::pixmap(point const& size, float scale)
+   pixmap::pixmap(point const& size, double scale)
     : _surface(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, size.x, size.y))
    {
       if (!_surface)
@@ -25,7 +25,7 @@ namespace cycfi { namespace elements
       cairo_surface_mark_dirty(_surface);
    }
 
-   pixmap::pixmap(char const* filename, float scale)
+   pixmap::pixmap(char const* filename, double scale)
     : _surface(nullptr)
    {
       auto  path = std::string(filename);
@@ -98,19 +98,19 @@ namespace cycfi { namespace elements
       double scx, scy;
       cairo_surface_get_device_scale(_surface, &scx, &scy);
       return {
-         float(cairo_image_surface_get_width(_surface) / scx),
-         float(cairo_image_surface_get_height(_surface) / scy)
+         cairo_image_surface_get_width(_surface) / scx,
+         cairo_image_surface_get_height(_surface) / scy
       };
    }
 
-   float pixmap::scale() const
+   double pixmap::scale() const
    {
       double scx, scy;
       cairo_surface_get_device_scale(_surface, &scx, &scy);
-      return float(1/scx);
+      return 1/scx;
    }
 
-   void pixmap::scale(float val)
+   void pixmap::scale(double val)
    {
       cairo_surface_set_device_scale(_surface, 1/val, 1/val);
    }

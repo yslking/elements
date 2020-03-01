@@ -17,8 +17,8 @@ namespace cycfi { namespace elements
    struct circle
    {
       constexpr   circle();
-      constexpr   circle(float cx, float cy, float radius);
-      constexpr   circle(point const& c, float radius);
+      constexpr   circle(double cx, double cy, double radius);
+      constexpr   circle(point const& c, double radius);
       constexpr   circle(rect const& r);
                   circle(circle const&) = default;
       circle&     operator=(circle const&) = default;
@@ -28,13 +28,13 @@ namespace cycfi { namespace elements
       bool        operator!=(circle const& other) const;
 
       point       center() const;
-      circle      inset(float x) const;
-      circle      move(float dx, float dy) const;
-      circle      move_to(float x, float y) const;
+      circle      inset(double x) const;
+      circle      move(double dx, double dy) const;
+      circle      move_to(double x, double y) const;
 
-      float       cx;
-      float       cy;
-      float       radius;
+      double      cx;
+      double      cy;
+      double      radius;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -44,11 +44,11 @@ namespace cycfi { namespace elements
     : cx(0.0), cy(0.0), radius(0.0)
    {}
 
-   inline constexpr circle::circle(float cx, float cy, float radius)
+   inline constexpr circle::circle(double cx, double cy, double radius)
     : cx(cx), cy(cy), radius(radius)
    {}
 
-   inline constexpr circle::circle(point const& c, float radius)
+   inline constexpr circle::circle(point const& c, double radius)
     : cx(c.x), cy(c.y), radius(radius)
    {}
 
@@ -71,17 +71,17 @@ namespace cycfi { namespace elements
       return { cx, cy };
    }
 
-   inline circle circle::inset(float x) const
+   inline circle circle::inset(double x) const
    {
       return { cx, cy, radius-x };
    }
 
-   inline circle circle::move(float dx, float dy) const
+   inline circle circle::move(double dx, double dy) const
    {
       return { cx+dx, cy+dy, radius };
    }
 
-   inline circle circle::move_to(float x, float y) const
+   inline circle circle::move_to(double x, double y) const
    {
       return { x, y, radius };
    }

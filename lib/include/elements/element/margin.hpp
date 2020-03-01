@@ -86,8 +86,8 @@ namespace cycfi { namespace elements
    // Left Margin
    struct left_margin_rect : static_empty_rect
    {
-      left_margin_rect(float left) : left(left) {}
-      float left;
+      left_margin_rect(double left) : left(left) {}
+      double left;
    };
 
    template <typename Subject>
@@ -101,8 +101,8 @@ namespace cycfi { namespace elements
    // Right Margin
    struct right_margin_rect : static_empty_rect
    {
-      right_margin_rect(float right) : right(right) {}
-      float right;
+      right_margin_rect(double right) : right(right) {}
+      double right;
    };
 
    template <typename Subject>
@@ -116,8 +116,8 @@ namespace cycfi { namespace elements
    // Top Margin
    struct top_margin_rect : static_empty_rect
    {
-      top_margin_rect(float top) : top(top) {}
-      float top;
+      top_margin_rect(double top) : top(top) {}
+      double top;
    };
 
    template <typename Subject>
@@ -131,8 +131,8 @@ namespace cycfi { namespace elements
    // Bottom Margin
    struct bottom_margin_rect : static_empty_rect
    {
-      bottom_margin_rect(float bottom) : bottom(bottom) {}
-      float bottom;
+      bottom_margin_rect(double bottom) : bottom(bottom) {}
+      double bottom;
    };
 
    template <typename Subject>
@@ -146,9 +146,9 @@ namespace cycfi { namespace elements
    // Left Top Margin
    struct left_top_margin_rect : static_empty_rect
    {
-      left_top_margin_rect(float left, float top) : left(left), top(top) {}
-      float left;
-      float top;
+      left_top_margin_rect(double left, double top) : left(left), top(top) {}
+      double left;
+      double top;
    };
 
    template <typename Subject>
@@ -162,10 +162,10 @@ namespace cycfi { namespace elements
    // X-Side Margin
    struct xside_margin_rect : static_empty_rect
    {
-      xside_margin_rect(float left, float right) : left(left), right(right) {}
-      xside_margin_rect(float left_right) : left(left_right), right(left_right) {}
-      float left;
-      float right;
+      xside_margin_rect(double left, double right) : left(left), right(right) {}
+      xside_margin_rect(double left_right) : left(left_right), right(left_right) {}
+      double left;
+      double right;
    };
 
    template <typename Subject>
@@ -179,10 +179,10 @@ namespace cycfi { namespace elements
    // Y-Side Margin
    struct yside_margin_rect : static_empty_rect
    {
-      yside_margin_rect(float top, float bottom) : top(top), bottom(bottom) {}
-      yside_margin_rect(float top_bottom) : top(top_bottom), bottom(top_bottom) {}
-      float top;
-      float bottom;
+      yside_margin_rect(double top, double bottom) : top(top), bottom(bottom) {}
+      yside_margin_rect(double top_bottom) : top(top_bottom), bottom(top_bottom) {}
+      double top;
+      double bottom;
    };
 
    template <typename Subject>

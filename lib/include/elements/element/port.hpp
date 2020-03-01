@@ -126,7 +126,7 @@ namespace cycfi { namespace elements
    {
    public:
 
-      static float            width;
+      static double           width;
 
       scroller_base(int traits = 0)
        : _tracking(none)
@@ -150,7 +150,7 @@ namespace cycfi { namespace elements
       struct scrollbar_info
       {
          double   pos;
-         float    extent;
+         double   extent;
          rect     bounds;
       };
 

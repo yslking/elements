@@ -40,7 +40,7 @@ namespace cycfi { namespace elements
                               static_text_box(
                                  std::string text
                                , font font_        = get_theme().text_box_font
-                               , float size        = get_theme().text_box_font_size
+                               , double size        = get_theme().text_box_font_size
                                , color color_      = get_theme().text_box_font_color
                               );
 
@@ -81,7 +81,7 @@ namespace cycfi { namespace elements
                               basic_text_box(
                                  std::string text
                                , font font_        = get_theme().text_box_font
-                               , float size        = get_theme().text_box_font_size
+                               , double size        = get_theme().text_box_font_size
                               );
                               ~basic_text_box();
                               basic_text_box(basic_text_box&& rhs) = default;
@@ -125,7 +125,7 @@ namespace cycfi { namespace elements
          char const* str;           // The start of the utf8 string
          point       pos;           // Position where glyph is drawn
          rect        bounds;        // Glyph bounds
-         float       line_height;   // Line height
+         double      line_height;   // Line height
       };
 
       char const*             caret_position(context const& ctx, point const& p);
@@ -143,7 +143,7 @@ namespace cycfi { namespace elements
 
       int                     _select_start;
       int                     _select_end;
-      float                   _current_x;
+      double                  _current_x;
       state_saver_f           _typing_state;
       bool                    _is_focus : 1;
       bool                    _show_caret : 1;
@@ -165,7 +165,7 @@ namespace cycfi { namespace elements
                               basic_input_box(
                                  std::string placeholder = ""
                                , font font_        = get_theme().text_box_font
-                               , float size        = get_theme().text_box_font_size
+                               , double size        = get_theme().text_box_font_size
                               )
                                : basic_text_box("", font_, size)
                                , _placeholder(std::move(placeholder))

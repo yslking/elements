@@ -41,7 +41,7 @@ namespace cycfi { namespace elements
       fill();
    }
 
-   inline void canvas::fill_round_rect(struct rect r, float radius)
+   inline void canvas::fill_round_rect(struct rect r, double radius)
    {
       round_rect(r, radius);
       fill();
@@ -53,7 +53,7 @@ namespace cycfi { namespace elements
       stroke();
    }
 
-   inline void canvas::stroke_round_rect(struct rect r, float radius)
+   inline void canvas::stroke_round_rect(struct rect r, double radius)
    {
       round_rect(r, radius);
       stroke();

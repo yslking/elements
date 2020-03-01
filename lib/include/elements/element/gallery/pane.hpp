@@ -44,7 +44,7 @@ namespace cycfi { namespace elements
    inline auto pane(
       std::string title,
       Content&& content,
-      float title_size = 1.0,
+      double title_size = 1.0,
       bool center_heading = true
    )
    {
@@ -55,7 +55,7 @@ namespace cycfi { namespace elements
    inline auto pane(
       char const* title,
       Content&& content,
-      float title_size = 1.0,
+      double title_size = 1.0,
       bool center_heading = true
    )
    {

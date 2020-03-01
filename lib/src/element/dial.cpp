@@ -51,7 +51,7 @@ namespace cycfi { namespace elements
       if (angle < 0.0)
          angle += _2pi;
 
-      float val = (angle-start_angle) / range;
+      double val = (angle-start_angle) / range;
       if (std::abs(val - value()) < 0.6)
          return clamp(val, 0.0, 1.0);
       return value();
@@ -86,10 +86,10 @@ namespace cycfi { namespace elements
       return true;
    }
 
-   void draw_indicator(canvas& cnv, circle const& cp, float val, color c)
+   void draw_indicator(canvas& cnv, circle const& cp, double val, color c)
    {
-      constexpr float w_factor = 0.1;  // relative width of the indicator
-      constexpr float h_factor = 0.2;  // relative height of the indicator
+      constexpr double w_factor = 0.1;  // relative width of the indicator
+      constexpr double h_factor = 0.2;  // relative height of the indicator
       using namespace radial_consts;
 
       auto state = cnv.new_state();
@@ -97,29 +97,29 @@ namespace cycfi { namespace elements
       cnv.translate({ center.x, center.y });
       cnv.rotate(offset + (val * range));
 
-      float r = cp.radius * 0.85;
-      float ind_w = r * w_factor;
-      float ind_h = r * h_factor;
+      double r = cp.radius * 0.85;
+      double ind_w = r * w_factor;
+      double ind_h = r * h_factor;
       rect  ind_r = { -ind_w, -ind_h, ind_w, ind_h };
       ind_r = ind_r.move(0, r*0.6);
 
       draw_indicator(cnv, ind_r, c);
    }
 
-   void draw_radial_marks(canvas& cnv, circle const& cp, float size, color c)
+   void draw_radial_marks(canvas& cnv, circle const& cp, double size, color c)
    {
       using namespace radial_consts;
       auto state = cnv.new_state();
       auto center = cp.center();
       constexpr auto num_divs = 50;
-      float div = range / num_divs;
+      double div = range / num_divs;
       auto const& theme = get_theme();
 
       cnv.translate({ center.x, center.y });
       cnv.stroke_style(theme.ticks_color);
       for (int i = 0; i != num_divs+1; ++i)
       {
-         float from = cp.radius;
+         double from = cp.radius;
          if (i % (num_divs / 10))
          {
             // Minor ticks
@@ -134,10 +134,10 @@ namespace cycfi { namespace elements
             cnv.stroke_style(c.level(theme.major_ticks_level));
          }
 
-         float angle = offset + (M_PI / 2) + (i * div);
-         float sin_ = std::sin(angle);
-         float cos_ = std::cos(angle);
-         float to = cp.radius - (size / 2);
+         double angle = offset + (M_PI / 2) + (i * div);
+         double sin_ = std::sin(angle);
+         double cos_ = std::cos(angle);
+         double to = cp.radius - (size / 2);
 
          cnv.move_to({ from * cos_, from * sin_ });
          cnv.line_to({ to * cos_, to * sin_ });
@@ -148,8 +148,8 @@ namespace cycfi { namespace elements
    void draw_radial_labels(
       canvas& cnv
     , circle cp
-    , float /* size */
-    , float font_size
+    , double /* size */
+    , double font_size
     , std::string const labels[]
     , std::size_t num_labels
    )
@@ -160,7 +160,7 @@ namespace cycfi { namespace elements
       using namespace radial_consts;
       auto state = cnv.new_state();
       auto center = cp.center();
-      float div = range / (num_labels-1);
+      double div = range / (num_labels-1);
       auto const& theme = get_theme();
 
       cnv.translate({ center.x, center.y });
@@ -174,9 +174,9 @@ namespace cycfi { namespace elements
 
       for (std::size_t i = 0; i != num_labels; ++i)
       {
-         float angle = offset + (M_PI / 2) + (i * div);
-         float sin_ = std::sin(angle);
-         float cos_ = std::cos(angle);
+         double angle = offset + (M_PI / 2) + (i * div);
+         double sin_ = std::sin(angle);
+         double cos_ = std::cos(angle);
 
          cnv.fill_text({ cp.radius * cos_, cp.radius * sin_ }, labels[i].c_str());
       }

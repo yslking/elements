@@ -77,17 +77,17 @@ namespace cycfi { namespace elements
    private:
 
       color                   _color;
-      float                   _value;
+      double                  _value;
    };
 
    template <std::size_t size>
    inline view_limits basic_knob_element<size>::limits(basic_context const& ctx) const
    {
-	  auto pt = point{ float(size), float(size) };
+	  auto pt = point{ size, size };
       return view_limits{ pt, pt };
    }
 
-   void draw_indicator(canvas& cnv, circle const& cp, float val, color c);
+   void draw_indicator(canvas& cnv, circle const& cp, double val, color c);
 
    template <std::size_t size>
    inline void basic_knob_element<size>::draw(context const& ctx)
@@ -184,7 +184,7 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
    };
 
-   void draw_radial_marks(canvas& cnv, circle const& cp, float size, color c);
+   void draw_radial_marks(canvas& cnv, circle const& cp, double size, color c);
 
    template <std::size_t size, typename Subject>
    inline void
@@ -217,7 +217,7 @@ namespace cycfi { namespace elements
       using base_type = radial_element_base<_size, Subject>;
       using string_array = std::array<std::string, num_labels>;
 
-                              radial_labels_element(Subject&& subject, float font_size)
+                              radial_labels_element(Subject&& subject, double font_size)
                                : base_type(std::move(subject))
                                , _font_size(font_size)
                               {}
@@ -225,14 +225,14 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
 
       string_array            _labels;
-      float                   _font_size;
+      double                  _font_size;
    };
 
    void draw_radial_labels(
       canvas& cnv
     , circle cp
-    , float size
-    , float font_size
+    , double size
+    , double font_size
     , std::string const labels[]
     , std::size_t _num_labels
    );
@@ -252,7 +252,7 @@ namespace cycfi { namespace elements
 
    template <std::size_t size, typename Subject, typename... S>
    inline radial_labels_element<size, Subject, sizeof...(S)>
-   radial_labels(Subject&& subject, float font_size, S&&... s)
+   radial_labels(Subject&& subject, double font_size, S&&... s)
    {
       auto r = radial_labels_element<size, Subject, sizeof...(S)>
          { std::move(subject), font_size };

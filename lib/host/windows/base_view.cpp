@@ -138,10 +138,10 @@ namespace cycfi { namespace elements
 
             view->draw(context,
                {
-                  float(dirty.left),
-                  float(dirty.top),
-                  float(dirty.right),
-                  float(dirty.bottom)
+                  dirty.left,
+                  dirty.top,
+                  dirty.right,
+                  dirty.bottom
                }
             );
 
@@ -186,8 +186,8 @@ namespace cycfi { namespace elements
          HWND hwnd, view_info* info, UINT message
        , WPARAM /* wparam */, LPARAM lparam)
       {
-         float pos_x = GET_X_LPARAM(lparam);
-         float pos_y = GET_Y_LPARAM(lparam);
+         double pos_x = GET_X_LPARAM(lparam);
+         double pos_y = GET_Y_LPARAM(lparam);
 
          auto scale = GetDpiForWindow(hwnd) / 96.0;
          pos_x /= scale;
@@ -309,8 +309,8 @@ namespace cycfi { namespace elements
 
       void on_cursor(HWND hwnd, base_view* view, LPARAM lparam, cursor_tracking state)
       {
-         float pos_x = GET_X_LPARAM(lparam);
-         float pos_y = GET_Y_LPARAM(lparam);
+         double pos_x = GET_X_LPARAM(lparam);
+         double pos_y = GET_Y_LPARAM(lparam);
 
          auto scale = GetDpiForWindow(hwnd) / 96.0;
          pos_x /= scale;
@@ -342,7 +342,7 @@ namespace cycfi { namespace elements
          pos.y = GET_Y_LPARAM(lparam);
          ScreenToClient(hwnd, &pos);
 
-         float scale = GetDpiForWindow(hwnd) / 96.0;
+         double scale = GetDpiForWindow(hwnd) / 96.0;
          info->vptr->scroll(dir, { pos.x / scale, pos.y / scale });
       }
 
@@ -420,14 +420,14 @@ namespace cycfi { namespace elements
 
             case WM_MOUSEWHEEL:
                {
-                  float delta = GET_WHEEL_DELTA_WPARAM(wparam);
+                  double delta = GET_WHEEL_DELTA_WPARAM(wparam);
                   on_scroll(hwnd, info, lparam, { 0, delta });
                }
                break;
 
             case WM_MOUSEHWHEEL:
                {
-                  float delta = -GET_WHEEL_DELTA_WPARAM(wparam);
+                  double delta = -GET_WHEEL_DELTA_WPARAM(wparam);
                   on_scroll(hwnd, info, lparam, { delta, 0 });
                }
                break;
@@ -553,16 +553,16 @@ namespace cycfi { namespace elements
       POINT pos;
       GetCursorPos(&pos);
       ScreenToClient(_view, &pos);
-      float scale = GetDpiForWindow(_view) / 96.0;
-      return { float(pos.x) / scale, float(pos.y) / scale };
+      double scale = GetDpiForWindow(_view) / 96.0;
+      return { pos.x / scale, pos.y / scale };
    }
 
    elements::extent base_view::size() const
    {
-      float scale = GetDpiForWindow(_view) / 96.0;
+      double scale = GetDpiForWindow(_view) / 96.0;
       RECT r;
       GetWindowRect(_view, &r);
-      return { float(r.right-r.left) / scale, float(r.bottom-r.top) / scale };
+      return { r.right-r.left / scale, r.bottom-r.top / scale };
    }
 
    void base_view::size(elements::extent p)

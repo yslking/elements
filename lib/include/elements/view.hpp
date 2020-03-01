@@ -46,8 +46,8 @@ namespace cycfi { namespace elements
 
       void                    layout();
       void                    layout(element &element);
-      float                   scale() const;
-      void                    scale(float val);
+      double                  scale() const;
+      void                    scale(double val);
 
       void                    refresh() override;
       void                    refresh(rect const& area) override;

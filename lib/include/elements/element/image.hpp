@@ -19,7 +19,7 @@ namespace cycfi { namespace elements
    class image : public element
    {
    public:
-                              image(char const* filename, float scale = 1);
+                              image(char const* filename, double scale = 1);
                               image(pixmap_ptr pixmap_);
 
       virtual point           size() const;
@@ -67,7 +67,7 @@ namespace cycfi { namespace elements
    class gizmo : public image
    {
    public:
-                              gizmo(char const* filename, float scale = 1);
+                              gizmo(char const* filename, double scale = 1);
                               gizmo(pixmap_ptr pixmap_);
 
       view_limits             limits(basic_context const& ctx) const override;
@@ -77,7 +77,7 @@ namespace cycfi { namespace elements
    class hgizmo : public image
    {
    public:
-                              hgizmo(char const* filename, float scale = 1);
+                              hgizmo(char const* filename, double scale = 1);
                               hgizmo(pixmap_ptr pixmap_);
 
       view_limits             limits(basic_context const& ctx) const override;
@@ -87,7 +87,7 @@ namespace cycfi { namespace elements
    class vgizmo : public image
    {
    public:
-                              vgizmo(char const* filename, float scale = 1);
+                              vgizmo(char const* filename, double scale = 1);
                               vgizmo(pixmap_ptr pixmap_);
 
       view_limits             limits(basic_context const& ctx) const override;
@@ -126,7 +126,7 @@ namespace cycfi { namespace elements
    class basic_sprite : public image
    {
    public:
-                              basic_sprite(char const* filename, float height, float scale = 1);
+                              basic_sprite(char const* filename, double height, double scale = 1);
 
       view_limits             limits(basic_context const& ctx) const override;
 
@@ -140,7 +140,7 @@ namespace cycfi { namespace elements
    private:
 
       size_t                  _index;
-      float                   _height;
+      double                  _height;
    };
 
    struct sprite : basic_sprite, sprite_as_int<sprite>, sprite_as_double<sprite>

@@ -18,16 +18,16 @@ namespace cycfi { namespace elements
    class align_element_base : public proxy_base
    {
    public:
-                     align_element_base(float align)
+                     align_element_base(double align)
                       : _align(align)
                      {}
 
-      float          align() const        { return _align; }
-      void           align(float align_)  { _align = align_; }
+      double         align() const        { return _align; }
+      void           align(double align_)  { _align = align_; }
 
    private:
 
-      float          _align;
+      double         _align;
    };
 
    template <typename Subject>
@@ -37,7 +37,7 @@ namespace cycfi { namespace elements
 
       using base_type = proxy<Subject, align_element_base>;
 
-                              halign_element(float align, Subject&& subject);
+                              halign_element(double align, Subject&& subject);
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
@@ -45,7 +45,7 @@ namespace cycfi { namespace elements
 
    template <typename Subject>
    inline halign_element<Subject>
-   halign(float align, Subject&& subject)
+   halign(double align, Subject&& subject)
    {
       return { align, std::forward<Subject>(subject) };
    }
@@ -72,7 +72,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Subject>
-   inline halign_element<Subject>::halign_element(float align, Subject&& subject)
+   inline halign_element<Subject>::halign_element(double align, Subject&& subject)
     : base_type(std::forward<Subject>(subject), align)
    {}
 
@@ -87,8 +87,8 @@ namespace cycfi { namespace elements
    inline void halign_element<Subject>::prepare_subject(context& ctx)
    {
       view_limits    e_limits          = this->subject().limits(ctx);
-      float          elem_width        = e_limits.min.x;
-      float          available_width   = ctx.bounds.width();
+      double         elem_width        = e_limits.min.x;
+      double         available_width   = ctx.bounds.width();
 
       if (available_width > elem_width)
          elem_width = std::min(available_width, e_limits.max.x);
@@ -105,7 +105,7 @@ namespace cycfi { namespace elements
 
       using base_type = proxy<Subject, align_element_base>;
 
-                              valign_element(float align, Subject&& subject);
+                              valign_element(double align, Subject&& subject);
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
@@ -113,7 +113,7 @@ namespace cycfi { namespace elements
 
    template <typename Subject>
    inline valign_element<Subject>
-   valign(float align, Subject&& subject)
+   valign(double align, Subject&& subject)
    {
       return { align, std::forward<Subject>(subject) };
    }
@@ -140,7 +140,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Subject>
-   valign_element<Subject>::valign_element(float align, Subject&& subject)
+   valign_element<Subject>::valign_element(double align, Subject&& subject)
     : base_type(std::forward<Subject>(subject), align)
    {}
 
@@ -155,8 +155,8 @@ namespace cycfi { namespace elements
    inline void valign_element<Subject>::prepare_subject(context& ctx)
    {
       auto  e_limits          = this->subject().limits(ctx);
-      float elem_height       = e_limits.min.y;
-      float available_height  = ctx.bounds.height();
+      double elem_height      = e_limits.min.y;
+      double available_height = ctx.bounds.height();
 
       if (available_height > elem_height)
          elem_height = std::min(available_height, e_limits.max.y);

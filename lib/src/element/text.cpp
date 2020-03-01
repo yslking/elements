@@ -21,7 +21,7 @@ namespace cycfi { namespace elements
    static_text_box::static_text_box(
       std::string text
     , font font_
-    , float size
+    , double size
     , color color_
    )
     : _text(std::move(text))
@@ -35,7 +35,7 @@ namespace cycfi { namespace elements
 
       auto  size = _layout.metrics();
       auto  min_line_height = size.ascent + size.descent + size.leading;
-      float line_height =
+      double line_height =
          (_current_size.y == -1) ?
          min_line_height :
          std::max(_current_size.y, min_line_height)
@@ -117,7 +117,7 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    // Editable Text Box
    ////////////////////////////////////////////////////////////////////////////
-   basic_text_box::basic_text_box(std::string text, font font_, float size)
+   basic_text_box::basic_text_box(std::string text, font font_, double size)
     : static_text_box(std::move(text), font_, size)
     , _select_start(-1)
     , _select_end(-1)
@@ -638,7 +638,7 @@ namespace cycfi { namespace elements
 
             // Get the actual coordinates of the glyph
             row.for_each(
-               [p, x, &found](char const* utf8, float left, float right)
+               [p, x, &found](char const* utf8, double left, double right)
                {
                   if ((p.x >= (x + left)) && (p.x < (x + right)))
                   {
@@ -693,7 +693,7 @@ namespace cycfi { namespace elements
          {
             // Get the actual coordinates of the glyph
             row.for_each(
-               [s, &info, x, y, ascent, descent](char const* utf8, float left, float right)
+               [s, &info, x, y, ascent, descent](char const* utf8, double left, double right)
                {
                   if (utf8 >= s)
                   {

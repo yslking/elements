@@ -10,13 +10,13 @@ namespace cycfi { namespace elements
    void draw_icon_button(
       context const& ctx
     , uint32_t code
-    , float size
+    , double size
     , color body_color_
     , bool state
     , bool hilite
    )
    {
-      float corner_radius = 6;
+      double corner_radius = 6;
       auto const& theme = get_theme();
 
       // Draw Button Body

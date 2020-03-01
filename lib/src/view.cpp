@@ -137,12 +137,12 @@
       refresh(element);
    }
 
-   float view::scale() const
+   double view::scale() const
    {
       return _main_element._scale;
    }
 
-   void view::scale(float val)
+   void view::scale(double val)
    {
       _main_element._scale = val;
       refresh();

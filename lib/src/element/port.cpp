@@ -29,7 +29,7 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    // scroller_base class implementation
    ////////////////////////////////////////////////////////////////////////////
-   float scroller_base::width = 10;
+   double scroller_base::width = 10;
 
    namespace
    {
@@ -42,7 +42,7 @@ namespace cycfi { namespace elements
       }
 
       void draw_scrollbar(
-         canvas& _canvas, rect const& b, float radius,
+         canvas& _canvas, rect const& b, double radius,
          color outline_color, color fill_color, point const& mp,
          bool is_tracking
       )
@@ -66,10 +66,10 @@ namespace cycfi { namespace elements
    {
       theme const& thm = get_theme();
 
-      float x = info.bounds.left;
-      float y = info.bounds.top;
-      float w = info.bounds.width();
-      float h = info.bounds.height();
+      double x = info.bounds.left;
+      double y = info.bounds.top;
+      double w = info.bounds.width();
+      double h = info.bounds.height();
 
       draw_scrollbar_fill(ctx.canvas, info.bounds, thm.scrollbar_color);
 
@@ -93,10 +93,10 @@ namespace cycfi { namespace elements
 
    rect scroller_base::scroll_bar_position(context const& /* ctx */, scrollbar_info const& info)
    {
-      float x = info.bounds.left;
-      float y = info.bounds.top;
-      float w = info.bounds.width();
-      float h = info.bounds.height();
+      double x = info.bounds.left;
+      double y = info.bounds.top;
+      double w = info.bounds.width();
+      double h = info.bounds.height();
 
       if (w > h)
       {

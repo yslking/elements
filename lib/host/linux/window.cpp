@@ -33,7 +33,7 @@ namespace cycfi { namespace elements
       h.on_activate.push_back(f);
    }
 
-   float get_scale(GtkWidget* widget)
+   double get_scale(GtkWidget* widget)
    {
       auto gdk_win = gtk_widget_get_window(widget);
       return 1.0f / gdk_window_get_scale_factor(gdk_win);
@@ -83,7 +83,7 @@ namespace cycfi { namespace elements
       auto scale = get_scale(_window->host);
       gint width, height;
       gtk_window_get_size(win, &width, &height);
-      return { float(width) / scale, float(height) / scale };
+      return { width / scale, height / scale };
    }
 
    void window::size(point const& p)

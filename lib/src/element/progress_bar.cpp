@@ -68,8 +68,8 @@ namespace cycfi::elements
    {
       auto const limits_ = background().limits(ctx);
       auto bounds = ctx.bounds;
-      bounds.height(std::min<float>(limits_.max.y, bounds.height()));
-      bounds.width(std::min<float>(limits_.max.x, bounds.width()));
+      bounds.height(std::min(limits_.max.y, bounds.height()));
+      bounds.width(std::min(limits_.max.x, bounds.width()));
       return bounds;
    }
 

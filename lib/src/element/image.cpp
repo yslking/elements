@@ -13,7 +13,7 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    // image implementation
    ////////////////////////////////////////////////////////////////////////////
-   image::image(char const* filename, float scale)
+   image::image(char const* filename, double scale)
     : _pixmap(std::make_shared<elements::pixmap>(filename, scale))
    {
    }
@@ -55,8 +55,8 @@ namespace cycfi { namespace elements
          // is the resized rect. The 9 patches have a 1-pixel overlap to
          // maintain seemless rendering.
 
-         float div_h = std::min<float>(src.width() / 2.4, dest.width() / 2);
-         float div_v = std::min<float>(src.height() / 2.4, dest.height() / 2);
+         double div_h = std::min(src.width() / 2.4, dest.width() / 2);
+         double div_v = std::min(src.height() / 2.4, dest.height() / 2);
 
          auto corner = rect{ 0, 0, div_h+1, div_v+1 };
 
@@ -76,7 +76,7 @@ namespace cycfi { namespace elements
       {
          // Variation of gizmo_parts allowing horizontal resizing only.
 
-         float div_h = std::min<float>(src.width() / 2.4, dest.width() / 2);
+         double div_h = std::min(src.width() / 2.4, dest.width() / 2);
          auto corner = rect{ 0, 0, div_h+1, src.height() };
 
          parts[0] = corner.move(dest.left, dest.top);
@@ -88,7 +88,7 @@ namespace cycfi { namespace elements
       {
          // Variation of gizmo_parts allowing vertical resizing only.
 
-         float div_v = std::min<float>(src.height() / 2.4, dest.height() / 2);
+         double div_v = std::min(src.height() / 2.4, dest.height() / 2);
          auto corner = rect{ 0, 0, src.width(), div_v+1 };
 
          parts[0] = corner.move(dest.left, dest.top);
@@ -97,7 +97,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   gizmo::gizmo(char const* filename, float scale)
+   gizmo::gizmo(char const* filename, double scale)
     : image(filename, scale)
    {}
 
@@ -125,7 +125,7 @@ namespace cycfi { namespace elements
          ctx.canvas.draw(pixmap(), src[i], dest[i]);
    }
 
-   hgizmo::hgizmo(char const* filename, float scale)
+   hgizmo::hgizmo(char const* filename, double scale)
     : image(filename, scale)
    {}
 
@@ -153,7 +153,7 @@ namespace cycfi { namespace elements
       ctx.canvas.draw(pixmap(), src[2], dest[2]);
    }
 
-   vgizmo::vgizmo(char const* filename, float scale)
+   vgizmo::vgizmo(char const* filename, double scale)
     : image(filename, scale)
    {}
 
@@ -181,7 +181,7 @@ namespace cycfi { namespace elements
       ctx.canvas.draw(pixmap(), src[2], dest[2]);
    }
 
-   basic_sprite::basic_sprite(char const* filename, float height, float scale)
+   basic_sprite::basic_sprite(char const* filename, double height, double scale)
     : image(filename, scale)
     , _index(0)
     , _height(height)

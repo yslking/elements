@@ -30,7 +30,7 @@ namespace cycfi { namespace elements
    void flowable_container::break_lines(
       std::vector<element_ptr>& rows
     , basic_context const& ctx
-    , float width
+    , double width
    )
    {
       double      curr_x = 0;
@@ -56,7 +56,7 @@ namespace cycfi { namespace elements
          rows.push_back(make_row(first, last));
    }
 
-   float flowable_container::width_of(size_t index, basic_context const& ctx) const
+   double flowable_container::width_of(size_t index, basic_context const& ctx) const
    {
       return at(index).limits(ctx).min.x;
    }

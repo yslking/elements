@@ -14,18 +14,18 @@ namespace cycfi { namespace elements
    struct point
    {
       constexpr         point();
-      constexpr         point(float x, float y);
+      constexpr         point(double x, double y);
       constexpr         point(point const&) = default;
       constexpr point&  operator=(point const &) = default;
 
       constexpr bool    operator==(point const& other) const;
       constexpr bool    operator!=(point const& other) const;
 
-      constexpr point   move(float dx, float dy) const;
-      constexpr point   move_to(float x, float y) const;
+      constexpr point   move(double dx, double dy) const;
+      constexpr point   move_to(double x, double y) const;
 
-      float             x;
-      float             y;
+      double            x;
+      double            y;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -39,8 +39,8 @@ namespace cycfi { namespace elements
                    : point(p)
                   {}
 
-      point       move(float dx, float dy) const = delete;
-      point       move_to(float x, float y) const = delete;
+      point       move(double dx, double dy) const = delete;
+      point       move_to(double x, double y) const = delete;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ namespace cycfi { namespace elements
     : x(0.0), y(0.0)
    {}
 
-   inline constexpr point::point(float x, float y)
+   inline constexpr point::point(double x, double y)
     : x(x), y(y)
    {}
 
@@ -64,7 +64,7 @@ namespace cycfi { namespace elements
       return !(*this == other);
    }
 
-   inline constexpr point point::move(float dx, float dy) const
+   inline constexpr point point::move(double dx, double dy) const
    {
       point r = *this;
       r.x += dx;
@@ -72,7 +72,7 @@ namespace cycfi { namespace elements
       return r;
    }
 
-   inline constexpr point point::move_to(float x_, float y_) const
+   inline constexpr point point::move_to(double x_, double y_) const
    {
       point r = *this;
       r.x = x_;

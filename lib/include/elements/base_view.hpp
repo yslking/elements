@@ -61,11 +61,11 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    struct view_stretch
    {
-      float    x;
-      float    y;
+      double   x;
+      double   y;
    };
 
-   constexpr float         full_extent    = 1E6;
+   constexpr double        full_extent    = 1E6;
    constexpr view_limits   full_limits    = { { 0.0, 0.0 }, { full_extent, full_extent } };
 
    ////////////////////////////////////////////////////////////////////////////

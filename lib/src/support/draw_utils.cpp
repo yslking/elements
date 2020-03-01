@@ -8,7 +8,7 @@
 
 namespace cycfi { namespace elements
 {
-   void draw_box_vgradient(canvas& cnv, rect const& bounds, float corner_radius)
+   void draw_box_vgradient(canvas& cnv, rect const& bounds, double corner_radius)
    {
       auto gradient = canvas::linear_gradient{
          bounds.top_left(),
@@ -31,7 +31,7 @@ namespace cycfi { namespace elements
       cnv.stroke();
    }
 
-   void draw_panel(canvas& cnv, rect const& bounds, color c, float corner_radius)
+   void draw_panel(canvas& cnv, rect const& bounds, color c, double corner_radius)
    {
       // Panel fill
       cnv.begin_path();
@@ -79,14 +79,14 @@ namespace cycfi { namespace elements
       }
    }
 
-   void draw_button(canvas& cnv, rect const& bounds, color c, float corner_radius)
+   void draw_button(canvas& cnv, rect const& bounds, color c, double corner_radius)
    {
       auto gradient = canvas::linear_gradient{
          bounds.top_left(),
          bounds.bottom_left()
       };
 
-      float const bg_alpha = get_theme().box_widget_bg_opacity;
+      double const bg_alpha = get_theme().box_widget_bg_opacity;
       gradient.add_color_stop({ 0.0, rgb(255, 255, 255).opacity(bg_alpha) });
       gradient.add_color_stop({ 1.0, rgb(0, 0, 0).opacity(bg_alpha) });
       cnv.fill_style(gradient);
@@ -108,8 +108,8 @@ namespace cycfi { namespace elements
    void draw_knob(canvas& cnv, circle const& cp, color c)
    {
       auto state = cnv.new_state();
-      float radius = cp.radius * 0.85;
-      float inset = cp.radius * 0.15;
+      double radius = cp.radius * 0.85;
+      double inset = cp.radius * 0.15;
 
       // Draw beveled knob
       {
@@ -190,7 +190,7 @@ namespace cycfi { namespace elements
    void draw_thumb(canvas& cnv, circle const& cp, color c, color ic)
    {
       auto state = cnv.new_state();
-      float radius = cp.radius;
+      double radius = cp.radius;
 
       // Fill the body color
       {

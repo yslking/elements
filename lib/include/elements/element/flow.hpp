@@ -24,7 +24,7 @@ namespace cycfi { namespace elements
       virtual void            break_lines(
                                  std::vector<element_ptr>& rows
                                , basic_context const& ctx
-                               , float width
+                               , double width
                               ) = 0;
    };
 
@@ -35,10 +35,10 @@ namespace cycfi { namespace elements
       void                    break_lines(
                                  std::vector<element_ptr>& rows
                                , basic_context const& ctx
-                               , float width
+                               , double width
                               ) override;
 
-      virtual float           width_of(size_t index, basic_context const& ctx) const;
+      virtual double          width_of(size_t index, basic_context const& ctx) const;
       virtual element_ptr     make_row(size_t first, size_t last);
    };
 

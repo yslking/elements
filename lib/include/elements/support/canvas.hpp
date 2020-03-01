@@ -41,7 +41,7 @@ namespace cycfi { namespace elements
       ///////////////////////////////////////////////////////////////////////////////////
       // Transforms
       void              translate(point const& p);
-      void              rotate(float rad);
+      void              rotate(double rad);
       void              scale(point const& p);
       point             device_to_user(point const& p);
       point             user_to_device(point const& p);
@@ -61,27 +61,27 @@ namespace cycfi { namespace elements
 
       void              move_to(point const& p);
       void              line_to(point const& p);
-      void              arc_to(point const& p1, point const& p2, float radius);
+      void              arc_to(point const& p1, point const& p2, double radius);
       void              arc(
-                           point const& p, float radius,
-                           float start_angle, float end_angle,
+                           point const& p, double radius,
+                           double start_angle, double end_angle,
                            bool ccw = false
                         );
       void              rect(elements::rect r);
-      void              round_rect(elements::rect r, float radius);
+      void              round_rect(elements::rect r, double radius);
       void              circle(elements::circle c);
 
       ///////////////////////////////////////////////////////////////////////////////////
       // Styles
       void              fill_style(color c);
       void              stroke_style(color c);
-      void              line_width(float w);
+      void              line_width(double w);
 
       ///////////////////////////////////////////////////////////////////////////////////
       // Gradients
       struct color_stop
       {
-         float             offset;
+         double            offset;
          elements::color   color;
       };
 
@@ -97,9 +97,9 @@ namespace cycfi { namespace elements
       struct radial_gradient
       {
          point c1 = {};
-         float c1_radius = {};
+         double c1_radius = {};
          point c2 = c1;
-         float c2_radius = c1_radius;
+         double c2_radius = c1_radius;
 
          void  add_color_stop(color_stop cs);
          std::vector<color_stop> space = {};
@@ -119,15 +119,15 @@ namespace cycfi { namespace elements
       ///////////////////////////////////////////////////////////////////////////////////
       // Rectangles
       void              fill_rect(elements::rect r);
-      void              fill_round_rect(elements::rect r, float radius);
+      void              fill_round_rect(elements::rect r, double radius);
       void              stroke_rect(elements::rect r);
-      void              stroke_round_rect(elements::rect r, float radius);
+      void              stroke_round_rect(elements::rect r, double radius);
 
       ///////////////////////////////////////////////////////////////////////////////////
       // Font
       void              font(elements::font const& font_);
-      void              font(elements::font const& font_, float size);
-      void              font_size(float size);
+      void              font(elements::font const& font_, double size);
+      void              font_size(double size);
 
       ///////////////////////////////////////////////////////////////////////////////////
       // Text
@@ -147,9 +147,9 @@ namespace cycfi { namespace elements
 
       struct text_metrics
       {
-         float       ascent;
-         float       descent;
-         float       leading;
+         double      ascent;
+         double      descent;
+         double      leading;
          point       size;
       };
 

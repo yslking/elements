@@ -18,8 +18,8 @@ namespace cycfi { namespace elements
 
       color                panel_color;
       color                frame_color;
-      float                frame_corner_radius;
-      float                frame_stroke_width;
+      double               frame_corner_radius;
+      double               frame_stroke_width;
       color                scrollbar_color;
       color                default_button_color;
 
@@ -31,41 +31,41 @@ namespace cycfi { namespace elements
                                           // uses for displaying text in OS UI elements
                                           // such as menus, window title-bars, etc.
 
-      float                box_widget_bg_opacity;
+      double               box_widget_bg_opacity;
 
       color                heading_font_color;
       font                 heading_font;
-      float                heading_font_size;
+      double               heading_font_size;
 
       color                label_font_color;
       font                 label_font;
-      float                label_font_size;
+      double               label_font_size;
 
       color                icon_color;
       font                 icon_font;
-      float                icon_font_size;
+      double               icon_font_size;
       color                icon_button_color;
 
       color                text_box_font_color;
       font                 text_box_font;
-      float                text_box_font_size;
+      double               text_box_font_size;
       color                text_box_hilite_color;
       color                text_box_caret_color;
-      float                text_box_caret_width;
+      double               text_box_caret_width;
       color                inactive_font_color;
 
       color                ticks_color;
-      float                major_ticks_level;
-      float                major_ticks_width;
-      float                minor_ticks_level;
-      float                minor_ticks_width;
+      double               major_ticks_level;
+      double               major_ticks_width;
+      double               minor_ticks_level;
+      double               minor_ticks_width;
 
       color                major_grid_color;
-      float                major_grid_width;
+      double               major_grid_width;
       color                minor_grid_color;
-      float                minor_grid_width;
+      double               minor_grid_width;
 
-      float                dialog_button_size;
+      double               dialog_button_size;
       extent               message_textbox_size;
    };
 

@@ -70,8 +70,8 @@ namespace cycfi { namespace elements
 
    rect layer_element::bounds_of(context const& ctx, std::size_t index) const
    {
-      float width = ctx.bounds.width();
-      float height = ctx.bounds.height();
+      double width = ctx.bounds.width();
+      double height = ctx.bounds.height();
       auto  limits = at(index).limits(ctx);
 
       clamp_min(width, limits.min.x);

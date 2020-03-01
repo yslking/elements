@@ -121,7 +121,7 @@ auto make_more_buttons()
             )
          );
 
-   float const button_scale = 1.0/4;
+   auto const button_scale = 1.0/4;
    sprite power_button = sprite{ "power_180x632.png", 158*button_scale, button_scale };
    sprite phase_button = sprite{ "phase_180x632.png", 158*button_scale, button_scale };
    sprite mail_button = sprite{ "mail_180x632.png", 158*button_scale, button_scale };

@@ -46,7 +46,7 @@ std::string const text =
 
 auto make_basic_text()
 {
-   auto fr = [](auto&& el, float top = 10)
+   auto fr = [](auto&& el, double top = 10)
    {
       return margin(
          { 10, top, 10, 10 },

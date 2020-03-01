@@ -46,7 +46,7 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    struct rbox_element : element
    {
-      rbox_element(color color_, float radius = 4)
+      rbox_element(color color_, double radius = 4)
        : _color(color_)
        , _radius(radius)
       {}
@@ -61,10 +61,10 @@ namespace cycfi { namespace elements
       }
 
       color _color;
-      float _radius;
+      double _radius;
    };
 
-   inline auto rbox(color color_, float radius = 4)
+   inline auto rbox(color color_, double radius = 4)
    {
       return rbox_element{ color_, radius };
    }
@@ -107,7 +107,7 @@ namespace cycfi { namespace elements
    {
    public:
 
-                     panel(float opacity_ = get_theme().panel_color.alpha)
+                     panel(double opacity_ = get_theme().panel_color.alpha)
                       : _opacity(opacity_)
                      {}
 
@@ -115,7 +115,7 @@ namespace cycfi { namespace elements
 
    private:
 
-      float          _opacity;
+      double         _opacity;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -134,13 +134,13 @@ namespace cycfi { namespace elements
       public:
                               heading(
                                  std::string text
-                               , float size_ = 1.0
+                               , double size_ = 1.0
                               );
 
                               heading(
                                  std::string text
                                , font font_
-                               , float size = 1.0
+                               , double size = 1.0
                               );
 
       view_limits             limits(basic_context const& ctx) const override;
@@ -153,8 +153,8 @@ namespace cycfi { namespace elements
       elements::font const&   font() const                           { return _font; }
       void                    font(elements::font_descr descr)       { _font = elements::font(descr); }
 
-      float                   size() const                           { return _size; }
-      void                    size(float size_)                      { _size = size_; }
+      double                  size() const                            { return _size; }
+      void                    size(double size_)                      { _size = size_; }
 
       using element::text;
 
@@ -162,7 +162,7 @@ namespace cycfi { namespace elements
 
       std::string             _text;
       elements::font          _font;
-      float                   _size;
+      double                  _size;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -183,13 +183,13 @@ namespace cycfi { namespace elements
    public:
                               label(
                                  std::string text
-                               , float size = 1.0
+                               , double size = 1.0
                               );
 
                               label(
                                  std::string text
                                , font font_
-                               , float size = 1.0
+                               , double size = 1.0
                               );
 
       view_limits             limits(basic_context const& ctx) const override;
@@ -203,8 +203,8 @@ namespace cycfi { namespace elements
       void                    font(elements::font_descr descr)       { _font = elements::font(descr); }
       void                    font(elements::font font_)             { _font = font_; }
 
-      float                   size() const                           { return _size; }
-      void                    size(float size_)                      { _size = size_; }
+      double                  size() const                           { return _size; }
+      void                    size(double size_)                      { _size = size_; }
 
       using element::text;
 
@@ -212,7 +212,7 @@ namespace cycfi { namespace elements
 
       std::string             _text;
       elements::font          _font;
-      float                   _size;
+      double                  _size;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -222,7 +222,7 @@ namespace cycfi { namespace elements
    {
    public:
 
-                              vgrid_lines(float major_divisions, float minor_divisions)
+                              vgrid_lines(double major_divisions, double minor_divisions)
                                : _major_divisions(major_divisions)
                                , _minor_divisions(minor_divisions)
                               {}
@@ -231,8 +231,8 @@ namespace cycfi { namespace elements
 
    private:
 
-      float                   _major_divisions;
-      float                   _minor_divisions;
+      double                  _major_divisions;
+      double                  _minor_divisions;
    };
 
    ////////////////////////////////////////////////////////////////////////////
@@ -240,13 +240,13 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    struct icon : element
    {
-                              icon(std::uint32_t code_, float size_ = 1.0);
+                              icon(std::uint32_t code_, double size_ = 1.0);
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    draw(context const& ctx) override;
 
       std::uint32_t           _code;
-      float                   _size;
+      double                  _size;
    };
 
    ////////////////////////////////////////////////////////////////////////////

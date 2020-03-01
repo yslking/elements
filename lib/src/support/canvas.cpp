@@ -25,7 +25,7 @@ namespace cycfi { namespace elements
       cairo_translate(&_context, p.x, p.y);
    }
 
-   void canvas::rotate(float rad)
+   void canvas::rotate(double rad)
    {
       cairo_rotate(&_context, rad);
    }
@@ -40,7 +40,7 @@ namespace cycfi { namespace elements
       double x = p.x;
       double y = p.y;
       cairo_device_to_user(&_context, &x, &y);
-      return { float(x), float(y) };
+      return { x, y };
    }
 
    point canvas::user_to_device(point const& p)
@@ -48,7 +48,7 @@ namespace cycfi { namespace elements
       double x = p.x;
       double y = p.y;
       cairo_user_to_device(&_context, &x, &y);
-      return { float(x), float(y) };
+      return { x, y };
    }
 
    void canvas::begin_path()
@@ -94,7 +94,7 @@ namespace cycfi { namespace elements
    {
       double x1, y1, x2, y2;
       cairo_clip_extents(&_context, &x1, &y1, &x2, &y2);
-      return { float(x1), float(y1), float(x2), float(y2) };
+      return { x1, y1, x2, y2 };
    }
 
    bool canvas::hit_test(point const& p) const
@@ -119,14 +119,14 @@ namespace cycfi { namespace elements
       cairo_line_to(&_context, p.x, p.y);
    }
 
-   void canvas::arc_to(point const& /* p1 */, point const& /* p2 */, float /* radius */)
+   void canvas::arc_to(point const& /* p1 */, point const& /* p2 */, double /* radius */)
    {
       assert(false); // unimplemented
    }
 
    void canvas::arc(
-      point const& p, float radius,
-      float start_angle, float end_angle,
+      point const& p, double radius,
+      double start_angle, double end_angle,
       bool ccw
    )
    {
@@ -141,7 +141,7 @@ namespace cycfi { namespace elements
       cairo_rectangle(&_context, r.left, r.top, r.width(), r.height());
    }
 
-   void canvas::round_rect(struct rect bounds, float radius)
+   void canvas::round_rect(struct rect bounds, double radius)
    {
       auto x = bounds.left;
       auto y = bounds.top;
@@ -178,7 +178,7 @@ namespace cycfi { namespace elements
          _state.pattern_set = _state.none_set;
    }
 
-   void canvas::line_width(float w)
+   void canvas::line_width(double w)
    {
       cairo_set_line_width(&_context, w);
    }
@@ -240,13 +240,13 @@ namespace cycfi { namespace elements
          cairo_set_font_face(&_context, font_._handle);
    }
 
-   void canvas::font(elements::font const& font_, float size)
+   void canvas::font(elements::font const& font_, double size)
    {
       font(font_);
       font_size(size);
    }
 
-   void canvas::font_size(float size)
+   void canvas::font_size(double size)
    {
       cairo_set_font_size(&_context, size);
    }
@@ -322,10 +322,10 @@ namespace cycfi { namespace elements
       cairo_scaled_font_extents(cairo_get_scaled_font(&_context), &font_extents);
 
       return {
-         /*ascent=*/    float(font_extents.ascent),
-         /*descent=*/   float(font_extents.descent),
-         /*leading=*/   float(font_extents.height-(font_extents.ascent+font_extents.descent)),
-         /*size=*/      { float(extents.width), float(extents.height) }
+         /*ascent=*/    font_extents.ascent,
+         /*descent=*/   font_extents.descent,
+         /*leading=*/   font_extents.height-(font_extents.ascent+font_extents.descent),
+         /*size=*/      { extents.width, extents.height }
       };
    }
 

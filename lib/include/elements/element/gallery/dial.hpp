@@ -23,12 +23,12 @@ namespace cycfi { namespace elements
    //    to attach callbacks (e.g. on_change) when the dial is moved.
    ////////////////////////////////////////////////////////////////////////////
    inline auto dial(
-      char const*          knob_sprite
-    , float                knob_height
-    , char const*          background_image
-    , char const*          caption_text
-    , float                scale = 1.0/4
-    , float                caption_size = 1.0
+      char const* knob_sprite
+    , double      knob_height
+    , char const* background_image
+    , char const* caption_text
+    , double      scale = 1.0/4
+    , double      caption_size = 1.0
    )
    {
       auto knob =  sprite{ knob_sprite, knob_height * scale, scale };

@@ -18,7 +18,7 @@ namespace cycfi { namespace elements
    void draw_icon_button(
       context const& ctx
     , uint32_t code
-    , float size
+    , double size
     , color body_color
     , bool state
     , bool hilite
@@ -29,7 +29,7 @@ namespace cycfi { namespace elements
    {
                               icon_button_element(
                                  uint32_t code
-                               , float size
+                               , double size
                                , color body_color = get_theme().default_button_color
                               )
                                : _code(code)
@@ -41,7 +41,7 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
 
       uint32_t                _code;
-      float                   _size;
+      double                  _size;
       color                   _body_color;
    };
 
@@ -62,7 +62,7 @@ namespace cycfi { namespace elements
 
    inline basic_toggle_button<> toggle_icon_button(
       uint32_t code
-    , float size
+    , double size
     , color body_color = get_theme().default_button_color
    )
    {
@@ -75,7 +75,7 @@ namespace cycfi { namespace elements
    inline basic_toggle_button<> toggle_icon_button(
       uint32_t code1
     , uint32_t code2
-    , float size
+    , double size
     , color body_color = get_theme().default_button_color
    )
    {
@@ -87,7 +87,7 @@ namespace cycfi { namespace elements
 
    inline layered_button icon_button(
       uint32_t code
-    , float size
+    , double size
     , color body_color = get_theme().default_button_color
    )
    {

@@ -12,7 +12,7 @@ namespace cycfi { namespace elements
    {
       struct layout_info
       {
-         float min, max, stretch, alloc;
+         double min, max, stretch, alloc;
       };
    }
 
@@ -84,7 +84,7 @@ namespace cycfi { namespace elements
       // accumulate the maximum stretch (max_stretch) for later. Initially set the
       // allocation sizes of each element to its minimum.
       double max_stretch = 0.0;
-      float total = 0.0;
+      double total = 0.0;
       std::vector<layout_info> info(size());
       for (std::size_t i = 0; i != size(); ++i)
       {
@@ -112,7 +112,7 @@ namespace cycfi { namespace elements
          curr += info.alloc;
 
          auto& elem = at(i++);
-         rect ebounds = { _left, float(prev), _right, float(curr) };
+         rect ebounds = { _left, prev, _right, curr };
          elem.layout(context{ ctx, &elem, ebounds });
       }
       *iter = curr;
@@ -186,7 +186,7 @@ namespace cycfi { namespace elements
          curr += info.alloc;
 
          auto& elem = at(i++);
-         rect ebounds = { float(prev), _top, float(curr), _bottom };
+         rect ebounds = { prev, _top, curr, _bottom };
          elem.layout(context{ ctx, &elem, ebounds });
       }
       *iter = curr;

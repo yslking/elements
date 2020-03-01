@@ -18,15 +18,15 @@ namespace cycfi { namespace elements
       // We multiply thumb min limits by 2 so that there is always some space to move it.
       if (_is_horiz = limits_.max.x > limits_.max.y; _is_horiz)
       {
-         limits_.min.y = std::max<float>(limits_.min.y, tmb_limits.min.y);
-         limits_.max.y = std::max<float>(limits_.max.y, tmb_limits.max.y);
-         limits_.min.x = std::max<float>(limits_.min.x, tmb_limits.min.x * 2);
+         limits_.min.y = std::max(limits_.min.y, tmb_limits.min.y);
+         limits_.max.y = std::max(limits_.max.y, tmb_limits.max.y);
+         limits_.min.x = std::max(limits_.min.x, tmb_limits.min.x * 2);
       }
       else
       {
-         limits_.min.x = std::max<float>(limits_.min.x, tmb_limits.min.x);
-         limits_.max.x = std::max<float>(limits_.max.x, tmb_limits.max.x);
-         limits_.min.y = std::max<float>(limits_.min.y, tmb_limits.min.y * 2);
+         limits_.min.x = std::max(limits_.min.x, tmb_limits.min.x);
+         limits_.max.x = std::max(limits_.max.x, tmb_limits.max.x);
+         limits_.min.y = std::max(limits_.min.y, tmb_limits.min.y * 2);
       }
 
       return limits_;
@@ -81,7 +81,7 @@ namespace cycfi { namespace elements
 
       if (_is_horiz)
       {
-         bounds.height(std::min<float>(limits_.max.y, bounds.height()));
+         bounds.height(std::min(limits_.max.y, bounds.height()));
          auto w2 = th_bounds.width() / 2;
          bounds.left += w2;
          bounds.right -= w2;
@@ -89,7 +89,7 @@ namespace cycfi { namespace elements
       }
       else
       {
-         bounds.width(std::min<float>(limits_.max.x, bounds.width()));
+         bounds.width(std::min(limits_.max.x, bounds.width()));
          auto h2 = th_bounds.height() / 2;
          bounds.top += h2;
          bounds.bottom -= h2;
@@ -197,21 +197,21 @@ namespace cycfi { namespace elements
    }
 
    void draw_slider_marks(
-      canvas& cnv, rect const& bounds, float size, std::size_t num_divs
+      canvas& cnv, rect const& bounds, double size, std::size_t num_divs
     , std::size_t major_divs, color c)
    {
       auto w = bounds.width();
       auto h = bounds.height();
       bool vertical = w < h;
-      float pos = vertical? bounds.top : bounds.left;
-      float incr = (vertical? h : w) / num_divs;
+      double pos = vertical? bounds.top : bounds.left;
+      double incr = (vertical? h : w) / num_divs;
       auto state = cnv.new_state();
       auto const& theme = get_theme();
 
       cnv.stroke_style(theme.ticks_color);
       for (std::size_t i = 0; i != num_divs+1; ++i)
       {
-         float inset = 0;
+         double inset = 0;
          if (i % (num_divs / major_divs))
          {
             // Minor ticks
@@ -244,8 +244,8 @@ namespace cycfi { namespace elements
    void draw_slider_labels(
       canvas& cnv
     , rect bounds
-    , float size
-    , float /* font_size */
+    , double size
+    , double /* font_size */
     , std::string const labels[]
     , std::size_t num_labels
    )
@@ -256,8 +256,8 @@ namespace cycfi { namespace elements
       bool vertical = bounds.width() < bounds.height();
       auto w = bounds.width();
       auto h = bounds.height();
-      float pos = vertical? bounds.top : bounds.left;
-      float incr = (vertical? h : w) / (num_labels - 1);
+      double pos = vertical? bounds.top : bounds.left;
+      double incr = (vertical? h : w) / (num_labels - 1);
       auto state = cnv.new_state();
       auto const& theme = get_theme();
 

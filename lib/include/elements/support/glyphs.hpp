@@ -34,10 +34,10 @@ namespace cycfi { namespace elements
                            );
 
       void                 draw(point const& pos, canvas& canvas_);
-      float                width() const;
+      double               width() const;
 
                            // for_each F signature:
-                           // bool f(char const* utf8, float left, float right);
+                           // bool f(char const* utf8, double left, double right);
                            template <typename F>
       void                 for_each(F f);
 
@@ -47,9 +47,9 @@ namespace cycfi { namespace elements
 
       struct font_metrics
       {
-         float             ascent;
-         float             descent;
-         float             leading;
+         double            ascent;
+         double            descent;
+         double            leading;
       };
 
       font_metrics         metrics() const;
@@ -84,7 +84,7 @@ namespace cycfi { namespace elements
    public:
                            master_glyphs(
                               char const* first, char const* last
-                            , font font_, float size
+                            , font font_, double size
                             , point start = { 0, 0 }
                            );
 
@@ -96,7 +96,7 @@ namespace cycfi { namespace elements
 
                            master_glyphs(
                               std::string_view str
-                            , font font_, float size
+                            , font font_, double size
                             , point start = { 0, 0 }
                            );
 
@@ -108,7 +108,7 @@ namespace cycfi { namespace elements
 
                            master_glyphs(
                               std::string const& str
-                            , font font_, float size
+                            , font font_, double size
                             , point start = { 0, 0 }
                            );
 
@@ -123,7 +123,7 @@ namespace cycfi { namespace elements
 
                            ~master_glyphs();
 
-      void                 break_lines(float width, std::vector<glyphs>& lines);
+      void                 break_lines(double width, std::vector<glyphs>& lines);
       void                 text(char const* first, char const* last, point const& start = { 0, 0 });
       void                 text(std::string_view str, point const& start = { 0, 0 });
       void                 text(std::string const& str, point const& start = { 0, 0 });
@@ -138,7 +138,7 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    inline master_glyphs::master_glyphs(
       std::string_view str
-    , font font_, float size
+    , font font_, double size
     , point start
    )
     : master_glyphs(str.data(), str.data() + str.size(), font_, size, start)
@@ -154,7 +154,7 @@ namespace cycfi { namespace elements
 
    inline master_glyphs::master_glyphs(
       std::string const& str
-    , font font_, float size
+    , font font_, double size
     , point start
    )
     : master_glyphs(str.data(), str.data() + str.size(), font_, size, start)
@@ -190,7 +190,7 @@ namespace cycfi { namespace elements
 
       int   glyph_index = 0;
       int   byte_index = 0;
-      float start_x = _glyphs->x;
+      double start_x = _glyphs->x;
 
       for (int i = 0; i < _cluster_count; i++)
       {
@@ -199,7 +199,7 @@ namespace cycfi { namespace elements
          cairo_text_extents_t extents;
          cairo_scaled_font_glyph_extents(_scaled_font, glyph, 1, &extents);
 
-         float x = glyph->x - start_x;
+         double x = glyph->x - start_x;
          if (!f(_first + byte_index, x, x + extents.x_advance))
             break;
 
