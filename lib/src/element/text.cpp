@@ -85,7 +85,7 @@ namespace cycfi { namespace elements
       cnv.fill_style(_color);
       for (auto& row : _rows)
       {
-         if (y - metrics.ascent > clip_extent.top && y + metrics.descent < clip_extent.bottom)
+         if (y + metrics.descent > clip_extent.top)
             row.draw({ x, y }, cnv);
          y += line_height;
          if (y > ctx.bounds.bottom + metrics.ascent)
