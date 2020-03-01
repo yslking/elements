@@ -997,7 +997,7 @@ namespace cycfi { namespace elements
 
          std::string ins;
 
-         // Copy clip ito ins, stop when a newline is found.
+         // Copy clip into ins, stop when a newline is found.
          // Also, limit ins to 256 characters.
          char const* p = &clip[0];
          char const* last = p + clip.size();
