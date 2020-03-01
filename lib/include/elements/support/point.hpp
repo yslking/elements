@@ -35,7 +35,7 @@ namespace cycfi { namespace elements
    {
       using point::point;
 
-                  extent(point p)
+                  extent(point const& p)
                    : point(p)
                   {}
 

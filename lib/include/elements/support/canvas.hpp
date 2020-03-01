@@ -40,11 +40,11 @@ namespace cycfi { namespace elements
 
       ///////////////////////////////////////////////////////////////////////////////////
       // Transforms
-      void              translate(point p);
+      void              translate(point const& p);
       void              rotate(float rad);
-      void              scale(point p);
-      point             device_to_user(point p);
-      point             user_to_device(point p);
+      void              scale(point const& p);
+      point             device_to_user(point const& p);
+      point             user_to_device(point const& p);
 
       ///////////////////////////////////////////////////////////////////////////////////
       // Paths
@@ -56,14 +56,14 @@ namespace cycfi { namespace elements
       void              stroke_preserve();
       void              clip();
       elements::rect    clip_extent() const;
-      bool              hit_test(point p) const;
+      bool              hit_test(point const& p) const;
       elements::rect    fill_extent() const;
 
-      void              move_to(point p);
-      void              line_to(point p);
-      void              arc_to(point p1, point p2, float radius);
+      void              move_to(point const& p);
+      void              line_to(point const& p);
+      void              arc_to(point const& p1, point const& p2, float radius);
       void              arc(
-                           point p, float radius,
+                           point const& p, float radius,
                            float start_angle, float end_angle,
                            bool ccw = false
                         );
@@ -153,8 +153,8 @@ namespace cycfi { namespace elements
          point       size;
       };
 
-      void              fill_text(point p, char const* utf8);
-      void              stroke_text(point p, char const* utf8);
+      void              fill_text(point const& p, char const* utf8);
+      void              stroke_text(point const& p, char const* utf8);
       text_metrics      measure_text(char const* utf8);
       void              text_align(int align);
 
@@ -163,7 +163,7 @@ namespace cycfi { namespace elements
 
       void              draw(pixmap const& pm, elements::rect src, elements::rect dest);
       void              draw(pixmap const& pm, elements::rect dest);
-      void              draw(pixmap const& pm, point pos);
+      void              draw(pixmap const& pm, point const& pos);
 
       ///////////////////////////////////////////////////////////////////////////////////
       // States

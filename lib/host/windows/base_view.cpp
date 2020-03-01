@@ -319,7 +319,7 @@ namespace cycfi { namespace elements
          view->cursor({ pos_x, pos_y }, state);
       }
 
-      void on_scroll(HWND hwnd, view_info* info, LPARAM lparam, point dir)
+      void on_scroll(HWND hwnd, view_info* info, LPARAM lparam, point const& dir)
       {
          auto now = std::chrono::steady_clock::now();
          auto elapsed = now - info->scroll_start;
@@ -586,7 +586,7 @@ namespace cycfi { namespace elements
       InvalidateRect(_view, &bounds, false);
    }
 
-   void base_view::refresh(rect area)
+   void base_view::refresh(rect const& area)
    {
       auto scale = GetDpiForWindow(_view) / 96.0;
       RECT r;

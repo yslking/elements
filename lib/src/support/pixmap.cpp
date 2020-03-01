@@ -14,7 +14,7 @@
 
 namespace cycfi { namespace elements
 {
-   pixmap::pixmap(point size, float scale)
+   pixmap::pixmap(point const& size, float scale)
     : _surface(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, size.x, size.y))
    {
       if (!_surface)

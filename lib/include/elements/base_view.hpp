@@ -298,11 +298,11 @@ namespace cycfi { namespace elements
                         base_view(host_window_handle h);
       virtual           ~base_view();
 
-      virtual void      draw(cairo_t* /* ctx */, rect /* area */) {};
+      virtual void      draw(cairo_t* /* ctx */, rect const&/* area */) {};
       virtual void      click(mouse_button /* btn */) {}
       virtual void      drag(mouse_button /* btn */) {}
-      virtual void      cursor(point /* p */, cursor_tracking /* status */) {}
-      virtual void      scroll(point /* dir */, point /* p */) {}
+      virtual void      cursor(point const& /* p */, cursor_tracking /* status */) {}
+      virtual void      scroll(point const& /* dir */, point const& /* p */) {}
       virtual void      key(key_info const& /* k */) {}
       virtual void      text(text_info const& /* info */) {}
       virtual void      begin_focus() {}
@@ -310,7 +310,7 @@ namespace cycfi { namespace elements
       virtual void      poll() {}
 
       virtual void      refresh();
-      virtual void      refresh(rect area);
+      virtual void      refresh(rect const& area);
 
       point             cursor_pos() const;
       extent            size() const;

@@ -32,7 +32,7 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
       void                    layout(context const& ctx) override;
 
-      bool                    scroll(context const& ctx, point dir, point p) override;
+      bool                    scroll(context const& ctx, point const& dir, point const& p) override;
       void                    begin_tracking(context const& ctx, info& track_info) override;
       void                    keep_tracking(context const& ctx, info& track_info) override;
       void                    end_tracking(context const& ctx, info& track_info) override;
@@ -43,7 +43,7 @@ namespace cycfi { namespace elements
 
       rect                    track_bounds(context const& ctx) const;
       rect                    thumb_bounds(context const& ctx) const;
-      virtual double          value_from_point(context const& ctx, point p);
+      virtual double          value_from_point(context const& ctx, point const& p);
 
       virtual element const&  thumb() const = 0;
       virtual element&        thumb() = 0;
@@ -128,13 +128,13 @@ namespace cycfi { namespace elements
 
       using basic_selector_base::basic_selector_base;
 
-      bool                 scroll(context const& ctx, point dir, point p) override;
+      bool                 scroll(context const& ctx, point const& dir, point const& p) override;
       void                 value(double val) override;
    };
 
    template <size_t num_states>
    inline bool selector_base<num_states>::scroll(
-      context const& ctx, point dir, point p)
+      context const& ctx, point const& dir, point const& p)
    {
       // We don't allow selector move via the scroll wheel.
       return false;
@@ -327,7 +327,7 @@ namespace cycfi { namespace elements
    };
 
    void draw_slider_marks(
-      canvas& cnv, rect bounds, float size, std::size_t major_divs
+      canvas& cnv, rect const& bounds, float size, std::size_t major_divs
     , std::size_t minor_divs, color c);
 
    template <

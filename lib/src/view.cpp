@@ -64,7 +64,7 @@
       return resized;
    }
 
-   void view::draw(cairo_t* context_, rect dirty_)
+   void view::draw(cairo_t* context_, rect const& dirty_)
    {
       if (_content.empty())
          return;
@@ -159,7 +159,7 @@
       );
    }
 
-   void view::refresh(rect area)
+   void view::refresh(rect const& area)
    {
       // Allow refresh to be called from another thread
       _io.post(
@@ -233,7 +233,7 @@
       );
    }
 
-   void view::cursor(point p, cursor_tracking status)
+   void view::cursor(point const& p, cursor_tracking status)
    {
       if (_content.empty())
          return;
@@ -248,7 +248,7 @@
       );
    }
 
-   void view::scroll(point dir, point p)
+   void view::scroll(point const& dir, point const& p)
    {
       if (_content.empty())
          return;

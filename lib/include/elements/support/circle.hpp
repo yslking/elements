@@ -18,8 +18,8 @@ namespace cycfi { namespace elements
    {
       constexpr   circle();
       constexpr   circle(float cx, float cy, float radius);
-      constexpr   circle(point c, float radius);
-      constexpr   circle(rect r);
+      constexpr   circle(point const& c, float radius);
+      constexpr   circle(rect const& r);
                   circle(circle const&) = default;
       circle&     operator=(circle const&) = default;
 
@@ -48,11 +48,11 @@ namespace cycfi { namespace elements
     : cx(cx), cy(cy), radius(radius)
    {}
 
-   inline constexpr circle::circle(point c, float radius)
+   inline constexpr circle::circle(point const& c, float radius)
     : cx(c.x), cy(c.y), radius(radius)
    {}
 
-   inline constexpr circle::circle(rect r)
+   inline constexpr circle::circle(rect const& r)
     : circle(center_point(r), std::min(r.width(), r.height()))
    {}
 

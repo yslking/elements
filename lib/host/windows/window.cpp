@@ -98,7 +98,7 @@ namespace cycfi { namespace elements
          return extra;
       }
 
-      void constrain_size(HWND hwnd, RECT& r, view_limits limits)
+      void constrain_size(HWND hwnd, RECT& r, view_limits const& limits)
       {
          auto scale = GetDpiForWindow(hwnd) / 96.0;
          auto extra = window_frame_size(hwnd);

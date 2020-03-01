@@ -48,7 +48,7 @@ namespace cycfi { namespace elements
       composite_base::draw(ctx);
    }
 
-   layer_element::hit_info layer_element::hit_element(context const& ctx, point p) const
+   layer_element::hit_info layer_element::hit_element(context const& ctx, point const& p) const
    {
       // we test from the highest index (topmost element)
       for (int ix = int(size())-1; ix >= 0; --ix)
@@ -134,7 +134,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   layer_element::hit_info deck_element::hit_element(context const& ctx, point p) const
+   layer_element::hit_info deck_element::hit_element(context const& ctx, point const& p) const
    {
       auto& e = at(_selected_index);
       if (e.wants_control())

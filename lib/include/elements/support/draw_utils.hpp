@@ -10,13 +10,13 @@
 
 namespace cycfi { namespace elements
 {
-   void draw_box_vgradient(canvas& cnv, rect bounds, float corner_radius = 4.0);
-   void draw_panel(canvas& cnv, rect bounds, color c, float corner_radius = 4.0);
-   void draw_button(canvas& cnv, rect bounds, color c, float corner_radius = 4.0);
-   void draw_knob(canvas& cnv, circle cp, color c);
-   void draw_indicator(canvas& cnv, rect bounds, color c);
-   void draw_thumb(canvas& cnv, circle cp, color c, color ic);
-   void draw_track(canvas& cnv, rect bounds);
+   void draw_box_vgradient(canvas& cnv, rect const& bounds, float corner_radius = 4.0);
+   void draw_panel(canvas& cnv, rect const& bounds, color c, float corner_radius = 4.0);
+   void draw_button(canvas& cnv, rect const& bounds, color c, float corner_radius = 4.0);
+   void draw_knob(canvas& cnv, circle const& cp, color c);
+   void draw_indicator(canvas& cnv, rect const& bounds, color c);
+   void draw_thumb(canvas& cnv, circle const& cp, color c, color ic);
+   void draw_track(canvas& cnv, rect const& bounds);
 }}
 
 #endif

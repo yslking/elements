@@ -22,7 +22,7 @@ namespace cycfi { namespace elements
 
       using base_type = proxy<Subject>;
 
-                              size_element(point size, Subject&& subject);
+                              size_element(point const& size, Subject&& subject);
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
@@ -33,14 +33,14 @@ namespace cycfi { namespace elements
    };
 
    template <typename Subject>
-   inline size_element<Subject>::size_element(point size, Subject&& subject)
+   inline size_element<Subject>::size_element(point const& size, Subject&& subject)
     : base_type(std::forward<Subject>(subject))
     , _size(size)
    {}
 
    template <typename Subject>
    inline size_element<Subject>
-   fixed_size(point size, Subject&& subject)
+   fixed_size(point const& size, Subject&& subject)
    {
       return { size, std::forward<Subject>(subject) };
    }
@@ -165,7 +165,7 @@ namespace cycfi { namespace elements
 
       using base_type = proxy<Subject>;
 
-                              min_size_element(point size, Subject&& subject);
+                              min_size_element(point const& size, Subject&& subject);
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
@@ -176,14 +176,14 @@ namespace cycfi { namespace elements
    };
 
    template <typename Subject>
-   inline min_size_element<Subject>::min_size_element(point size, Subject&& subject)
+   inline min_size_element<Subject>::min_size_element(point const& size, Subject&& subject)
     : base_type(std::forward<Subject>(subject))
     , _size(size)
    {}
 
    template <typename Subject>
    inline min_size_element<Subject>
-   min_size(point size, Subject&& subject)
+   min_size(point const& size, Subject&& subject)
    {
       return { size, std::forward<Subject>(subject) };
    }
@@ -312,7 +312,7 @@ namespace cycfi { namespace elements
 
       using base_type = proxy<Subject>;
 
-                              max_size_element(point size, Subject&& subject);
+                              max_size_element(point const& size, Subject&& subject);
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
@@ -323,14 +323,14 @@ namespace cycfi { namespace elements
    };
 
    template <typename Subject>
-   inline max_size_element<Subject>::max_size_element(point size, Subject&& subject)
+   inline max_size_element<Subject>::max_size_element(point const& size, Subject&& subject)
     : base_type(std::forward<Subject>(subject))
     , _size(size)
    {}
 
    template <typename Subject>
    inline max_size_element<Subject>
-   max_size(point size, Subject&& subject)
+   max_size(point const& size, Subject&& subject)
    {
       return { size, std::forward<Subject>(subject) };
    }

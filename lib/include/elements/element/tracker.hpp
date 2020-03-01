@@ -54,11 +54,11 @@ namespace cycfi { namespace elements
 
       using info_ptr = std::unique_ptr<info>;
 
-      virtual info_ptr     new_state(context const& ctx, point start);
+      virtual info_ptr     new_state(context const& ctx, point const& start);
       virtual void         begin_tracking(context const& ctx, info& track_info) = 0;
       virtual void         keep_tracking(context const& ctx, info& track_info) = 0;
       virtual void         end_tracking(context const& ctx, info& track_info) = 0;
-      void                 track_scroll(context const& ctx, point dir, point p);
+      void                 track_scroll(context const& ctx, point const& dir, point const& p);
 
    private:
 
@@ -111,7 +111,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Base>
-   inline typename tracker<Base>::info_ptr tracker<Base>::new_state(context const& /* ctx */, point start)
+   inline typename tracker<Base>::info_ptr tracker<Base>::new_state(context const& /* ctx */, point const& start)
    {
       return std::make_unique<info>(start);
    }
@@ -123,7 +123,7 @@ namespace cycfi { namespace elements
    }
 
    template <typename Base>
-   inline void tracker<Base>::track_scroll(context const& ctx, point /* dir */, point /* p */)
+   inline void tracker<Base>::track_scroll(context const& ctx, point const& /* dir */, point const& /* p */)
    {
       this->on_tracking(ctx, element::while_tracking);
    }

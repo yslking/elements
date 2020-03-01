@@ -110,7 +110,7 @@ namespace cycfi { namespace elements
          }
       };
 
-      virtual bool               scroll_into_view(context const& ctx, rect r) = 0;
+      virtual bool               scroll_into_view(context const& ctx, rect const& r) = 0;
       static scrollable_context  find(context const& ctx);
    };
 
@@ -136,15 +136,15 @@ namespace cycfi { namespace elements
       ~scroller_base() {}
 
       view_limits             limits(basic_context const& ctx) const override;
-      element*                hit_test(context const& ctx, point p) override;
+      element*                hit_test(context const& ctx, point const& p) override;
       void                    draw(context const& ctx) override;
 
       bool                    wants_control() const override;
       element*                click(context const& ctx, mouse_button btn) override;
       void                    drag(context const& ctx, mouse_button btn) override;
-      bool                    scroll(context const& ctx, point dir, point p) override;
-      bool                    scroll_into_view(context const& ctx, rect r) override;
-      bool                    cursor(context const& ctx, point p, cursor_tracking status) override;
+      bool                    scroll(context const& ctx, point const& dir, point const& p) override;
+      bool                    scroll_into_view(context const& ctx, rect const& r) override;
+      bool                    cursor(context const& ctx, point const& p, cursor_tracking status) override;
       bool                    key(context const& ctx, key_info k) override;
 
       struct scrollbar_info
@@ -154,7 +154,7 @@ namespace cycfi { namespace elements
          rect     bounds;
       };
 
-      virtual void            draw_scroll_bar(context const& ctx, scrollbar_info const& info, point mp);
+      virtual void            draw_scroll_bar(context const& ctx, scrollbar_info const& info, point const& mp);
       virtual rect            scroll_bar_position(context const& ctx, scrollbar_info const& info);
 
    private:
@@ -176,7 +176,7 @@ namespace cycfi { namespace elements
       };
 
       scrollbar_bounds  get_scrollbar_bounds(context const& ctx);
-      bool              reposition(context const& ctx, point p);
+      bool              reposition(context const& ctx, point const& p);
 
       bool              has_scrollbars() const { return !(_traits & no_scrollbars); }
       bool              allow_hscroll() const { return !(_traits & no_hscroll); }
@@ -253,7 +253,7 @@ namespace cycfi { namespace elements
    inline view_limits vport_element<Base>::limits(basic_context const& ctx) const
    {
       view_limits e_limits = this->subject().limits(ctx);
-      return {{e_limits.min.x, min_port_size }, e_limits.max };
+      return {{ e_limits.min.x, min_port_size }, e_limits.max };
    }
 
    template <typename Base>

@@ -69,7 +69,7 @@ namespace cycfi { namespace elements
       draw(pm, { 0, 0, pm.size() }, dest);
    }
 
-   inline void canvas::draw(pixmap const& pm, point pos)
+   inline void canvas::draw(pixmap const& pm, point const& pos)
    {
       draw(pm, { 0, 0, pm.size() }, { pos, pm.size() });
    }

@@ -7,7 +7,7 @@
 
 namespace cycfi { namespace elements
 {
-   element* basic_popup_element::hit_test(context const& ctx, point p)
+   element* basic_popup_element::hit_test(context const& ctx, point const& p)
    {
       // We call element::hit_test instead of proxy_base::hit_test because we
       // want to process hits/clicks outside the subject's bounds (e.g. to
@@ -32,7 +32,7 @@ namespace cycfi { namespace elements
       return r;
    }
 
-   bool basic_popup_element::cursor(context const& ctx, point p, cursor_tracking status)
+   bool basic_popup_element::cursor(context const& ctx, point const& p, cursor_tracking status)
    {
       bool hit = proxy_base::hit_test(ctx, p);
       if (status == cursor_tracking::leaving || hit)

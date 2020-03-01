@@ -28,7 +28,7 @@ namespace cycfi { namespace elements
    {
    public:
 
-      explicit          pixmap(point size, float scale = 1);
+      explicit          pixmap(point const& size, float scale = 1);
       explicit          pixmap(char const* filename, float scale = 1);
                         pixmap(pixmap const& rhs) = delete;
                         pixmap(pixmap&& rhs);

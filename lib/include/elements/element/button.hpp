@@ -31,7 +31,7 @@ namespace cycfi { namespace elements
 
       bool              wants_control() const override;
       element*          click(context const& ctx, mouse_button btn) override;
-      bool              cursor(context const& ctx, point p, cursor_tracking status) override;
+      bool              cursor(context const& ctx, point const& p, cursor_tracking status) override;
       void              drag(context const& ctx, mouse_button btn) override;
 
       void              value(bool new_state) override;
@@ -64,7 +64,7 @@ namespace cycfi { namespace elements
                         layered_button(W1&& off, W2&& on);
 
       bool              wants_control() const override;
-      element*          hit_test(context const& ctx, point p) override;
+      element*          hit_test(context const& ctx, point const& p) override;
       element*          click(context const& ctx, mouse_button btn) override;
       void              drag(context const& ctx, mouse_button btn) override;
 

@@ -22,7 +22,7 @@ namespace cycfi { namespace elements
       return { 1.0f, 1.0f };
    }
 
-   element* element::hit_test(context const& ctx, point p)
+   element* element::hit_test(context const& ctx, point const& p)
    {
       return (ctx.bounds.includes(p)) ? this : 0;
    }
@@ -60,12 +60,12 @@ namespace cycfi { namespace elements
       return false;
    }
 
-   bool element::cursor(context const& /* ctx */, point /* p */, cursor_tracking /* status */)
+   bool element::cursor(context const& /* ctx */, point const& /* p */, cursor_tracking /* status */)
    {
       return false;
    }
 
-   bool element::scroll(context const& /* ctx */, point /* dir */, point /* p */)
+   bool element::scroll(context const& /* ctx */, point const& /* dir */, point const& /* p */)
    {
       return false;
    }

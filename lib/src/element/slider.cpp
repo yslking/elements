@@ -63,7 +63,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   bool slider_base::scroll(context const& ctx, point dir, point p)
+   bool slider_base::scroll(context const& ctx, point const& dir, point const& p)
    {
       double new_value = value() + (_is_horiz ? -dir.x : dir.y) * 0.005;
       clamp(new_value, 0.0, 1.0);
@@ -120,7 +120,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   double slider_base::value_from_point(context const& ctx, point p)
+   double slider_base::value_from_point(context const& ctx, point const& p)
    {
       auto  bounds = ctx.bounds;
       auto  w = bounds.width();
@@ -197,7 +197,7 @@ namespace cycfi { namespace elements
    }
 
    void draw_slider_marks(
-      canvas& cnv, rect bounds, float size, std::size_t num_divs
+      canvas& cnv, rect const& bounds, float size, std::size_t num_divs
     , std::size_t major_divs, color c)
    {
       auto w = bounds.width();

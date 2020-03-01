@@ -23,7 +23,7 @@ namespace cycfi { namespace elements
                               {}
 
       view_limits             limits(basic_context const& ctx) const override;
-      bool                    cursor(context const& ctx, point p, cursor_tracking status) override;
+      bool                    cursor(context const& ctx, point const& p, cursor_tracking status) override;
       bool                    wants_control() const override;
 
       std::string             _text;
@@ -37,7 +37,7 @@ namespace cycfi { namespace elements
       return { { size.x, size.y }, { size.x, size.y } };
    }
 
-   inline bool toggle_selector::cursor(context const& ctx, point p, cursor_tracking status)
+   inline bool toggle_selector::cursor(context const& ctx, point const& p, cursor_tracking status)
    {
       ctx.view.refresh(ctx);
       return true;

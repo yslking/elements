@@ -89,7 +89,7 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
       element*                click(context const& ctx, mouse_button btn) override;
       void                    drag(context const& ctx, mouse_button btn) override;
-      bool                    cursor(context const& ctx, point p, cursor_tracking status) override;
+      bool                    cursor(context const& ctx, point const& p, cursor_tracking status) override;
       bool                    key(context const& ctx, key_info k) override;
       bool                    wants_focus() const override;
       void                    begin_focus() override;
@@ -128,7 +128,7 @@ namespace cycfi { namespace elements
          float       line_height;   // Line height
       };
 
-      char const*             caret_position(context const& ctx, point p);
+      char const*             caret_position(context const& ctx, point const& p);
       glyph_metrics           glyph_info(context const& ctx, char const* s);
 
       virtual void            delete_();

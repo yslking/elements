@@ -489,7 +489,7 @@ namespace cycfi { namespace elements
       refresh({ 0, 0, float(x), float(y) });
    }
 
-   void base_view::refresh(rect area)
+   void base_view::refresh(rect const& area)
    {
       auto scale = 1; // get_scale(_view->widget);
       gtk_widget_queue_draw_area(_view->widget,

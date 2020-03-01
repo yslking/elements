@@ -42,7 +42,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   double dial_base::value_from_point(context const& ctx, point p)
+   double dial_base::value_from_point(context const& ctx, point const& p)
    {
       using namespace radial_consts;
 
@@ -78,7 +78,7 @@ namespace cycfi { namespace elements
    {
    }
 
-   bool dial_base::scroll(context const& ctx, point dir, point p)
+   bool dial_base::scroll(context const& ctx, point const& dir, point const& p)
    {
       track_scroll(ctx, dir, p);
       edit_value(this, value() + dir.y * 0.005);
@@ -86,7 +86,7 @@ namespace cycfi { namespace elements
       return true;
    }
 
-   void draw_indicator(canvas& cnv, circle cp, float val, color c)
+   void draw_indicator(canvas& cnv, circle const& cp, float val, color c)
    {
       constexpr float w_factor = 0.1;  // relative width of the indicator
       constexpr float h_factor = 0.2;  // relative height of the indicator
@@ -106,7 +106,7 @@ namespace cycfi { namespace elements
       draw_indicator(cnv, ind_r, c);
    }
 
-   void draw_radial_marks(canvas& cnv, circle cp, float size, color c)
+   void draw_radial_marks(canvas& cnv, circle const& cp, float size, color c)
    {
       using namespace radial_consts;
       auto state = cnv.new_state();

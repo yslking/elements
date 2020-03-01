@@ -212,7 +212,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   bool basic_text_box::cursor(context const& ctx, point p, cursor_tracking /* status */)
+   bool basic_text_box::cursor(context const& ctx, point const& p, cursor_tracking /* status */)
    {
       if (ctx.bounds.includes(p))
       {
@@ -616,7 +616,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   char const* basic_text_box::caret_position(context const& ctx, point p)
+   char const* basic_text_box::caret_position(context const& ctx, point const& p)
    {
       auto  x = ctx.bounds.left;
       auto  y = ctx.bounds.top;

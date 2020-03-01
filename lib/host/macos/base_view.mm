@@ -598,7 +598,7 @@ namespace cycfi { namespace elements
       [get_mac_view(host()) setNeedsDisplay : YES];
    }
 
-   void base_view::refresh(rect area)
+   void base_view::refresh(rect const& area)
    {
       [get_mac_view(host()) setNeedsDisplayInRect
          : CGRectMake(area.left, area.top, area.width(), area.height())

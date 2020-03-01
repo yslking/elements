@@ -8,7 +8,7 @@
 
 namespace cycfi { namespace elements
 {
-   void draw_button_base(context const& ctx, rect bounds, color color_, float corner_radius)
+   void draw_button_base(context const& ctx, rect const& bounds, color color_, float corner_radius)
    {
       draw_button(ctx.canvas, bounds, color_, corner_radius);
    }

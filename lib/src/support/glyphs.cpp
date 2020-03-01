@@ -79,7 +79,7 @@ namespace cycfi { namespace elements
       strip_leading([](auto cp){ return is_newline(cp); });
    }
 
-   void glyphs::draw(point pos, canvas& canvas_)
+   void glyphs::draw(point const& pos, canvas& canvas_)
    {
       // return early if there's nothing to draw
       if (_first == _last)
@@ -211,7 +211,7 @@ namespace cycfi { namespace elements
       _scaled_font = nullptr;
    }
 
-   void master_glyphs::text(char const* first, char const* last, point start)
+   void master_glyphs::text(char const* first, char const* last, point const& start)
    {
       if (_glyphs)
       {
@@ -314,7 +314,7 @@ namespace cycfi { namespace elements
       lines.push_back(std::move(glyph_));
    }
 
-   void master_glyphs::build(point start)
+   void master_glyphs::build(point const& start)
    {
       // reurn early if there's nothing to build
       if (_first == _last)

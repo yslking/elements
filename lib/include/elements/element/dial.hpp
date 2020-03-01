@@ -26,14 +26,14 @@ namespace cycfi { namespace elements
 
       void                 prepare_subject(context& ctx) override;
 
-      bool                 scroll(context const& ctx, point dir, point p) override;
+      bool                 scroll(context const& ctx, point const& dir, point const& p) override;
       void                 begin_tracking(context const& ctx, info& track_info) override;
       void                 keep_tracking(context const& ctx, info& track_info) override;
       void                 end_tracking(context const& ctx, info& track_info) override;
 
       double               value() const override;
       void                 value(double val) override;
-      virtual double       value_from_point(context const& ctx, point p);
+      virtual double       value_from_point(context const& ctx, point const& p);
 
       dial_function        on_change;
 
@@ -87,7 +87,7 @@ namespace cycfi { namespace elements
       return view_limits{ pt, pt };
    }
 
-   void draw_indicator(canvas& cnv, circle cp, float val, color c);
+   void draw_indicator(canvas& cnv, circle const& cp, float val, color c);
 
    template <std::size_t size>
    inline void basic_knob_element<size>::draw(context const& ctx)
@@ -184,7 +184,7 @@ namespace cycfi { namespace elements
       void                    draw(context const& ctx) override;
    };
 
-   void draw_radial_marks(canvas& cnv, circle cp, float size, color c);
+   void draw_radial_marks(canvas& cnv, circle const& cp, float size, color c);
 
    template <std::size_t size, typename Subject>
    inline void

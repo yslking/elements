@@ -8,7 +8,7 @@
 
 namespace cycfi { namespace elements
 {
-   void draw_box_vgradient(canvas& cnv, rect bounds, float corner_radius)
+   void draw_box_vgradient(canvas& cnv, rect const& bounds, float corner_radius)
    {
       auto gradient = canvas::linear_gradient{
          bounds.top_left(),
@@ -31,7 +31,7 @@ namespace cycfi { namespace elements
       cnv.stroke();
    }
 
-   void draw_panel(canvas& cnv, rect bounds, color c, float corner_radius)
+   void draw_panel(canvas& cnv, rect const& bounds, color c, float corner_radius)
    {
       // Panel fill
       cnv.begin_path();
@@ -79,7 +79,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   void draw_button(canvas& cnv, rect bounds, color c, float corner_radius)
+   void draw_button(canvas& cnv, rect const& bounds, color c, float corner_radius)
    {
       auto gradient = canvas::linear_gradient{
          bounds.top_left(),
@@ -105,7 +105,7 @@ namespace cycfi { namespace elements
       cnv.stroke();
    }
 
-   void draw_knob(canvas& cnv, circle cp, color c)
+   void draw_knob(canvas& cnv, circle const& cp, color c)
    {
       auto state = cnv.new_state();
       float radius = cp.radius * 0.85;
@@ -179,7 +179,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   void draw_indicator(canvas& cnv, rect bounds, color c)
+   void draw_indicator(canvas& cnv, rect const& bounds, color c)
    {
       cnv.fill_style(c);
       cnv.begin_path();
@@ -187,7 +187,7 @@ namespace cycfi { namespace elements
       cnv.fill();
    }
 
-   void draw_thumb(canvas& cnv, circle cp, color c, color ic)
+   void draw_thumb(canvas& cnv, circle const& cp, color c, color ic)
    {
       auto state = cnv.new_state();
       float radius = cp.radius;
@@ -250,8 +250,9 @@ namespace cycfi { namespace elements
       }
    }
 
-   void draw_track(canvas& cnv, rect bounds)
+   void draw_track(canvas& cnv, rect const& bounds_)
    {
+      auto bounds = bounds_;
       auto state = cnv.new_state();
       auto w = bounds.width();
       auto h = bounds.height();

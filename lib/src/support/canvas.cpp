@@ -20,7 +20,7 @@ namespace cycfi { namespace elements
    {
    }
 
-   void canvas::translate(point p)
+   void canvas::translate(point const& p)
    {
       cairo_translate(&_context, p.x, p.y);
    }
@@ -30,12 +30,12 @@ namespace cycfi { namespace elements
       cairo_rotate(&_context, rad);
    }
 
-   void canvas::scale(point p)
+   void canvas::scale(point const& p)
    {
       cairo_scale(&_context, p.x, p.y);
    }
 
-   point canvas::device_to_user(point p)
+   point canvas::device_to_user(point const& p)
    {
       double x = p.x;
       double y = p.y;
@@ -43,7 +43,7 @@ namespace cycfi { namespace elements
       return { float(x), float(y) };
    }
 
-   point canvas::user_to_device(point p)
+   point canvas::user_to_device(point const& p)
    {
       double x = p.x;
       double y = p.y;
@@ -97,7 +97,7 @@ namespace cycfi { namespace elements
       return { float(x1), float(y1), float(x2), float(y2) };
    }
 
-   bool canvas::hit_test(point p) const
+   bool canvas::hit_test(point const& p) const
    {
       return cairo_in_fill(&_context, p.x, p.y);
    }
@@ -109,23 +109,23 @@ namespace cycfi { namespace elements
       return elements::rect(x1, y1, x2, y2);
    }
 
-   void canvas::move_to(point p)
+   void canvas::move_to(point const& p)
    {
       cairo_move_to(&_context, p.x, p.y);
    }
 
-   void canvas::line_to(point p)
+   void canvas::line_to(point const& p)
    {
       cairo_line_to(&_context, p.x, p.y);
    }
 
-   void canvas::arc_to(point /* p1 */, point /* p2 */, float /* radius */)
+   void canvas::arc_to(point const& /* p1 */, point const& /* p2 */, float /* radius */)
    {
       assert(false); // unimplemented
    }
 
    void canvas::arc(
-      point p, float radius,
+      point const& p, float radius,
       float start_angle, float end_angle,
       bool ccw
    )
@@ -253,7 +253,7 @@ namespace cycfi { namespace elements
 
    namespace
    {
-      point get_text_start(cairo_t& _context, point p, int align, char const* utf8)
+      point get_text_start(cairo_t& _context, point const& p_, int align, char const* utf8)
       {
          cairo_text_extents_t extents;
          cairo_text_extents(&_context, utf8, &extents);
@@ -261,6 +261,7 @@ namespace cycfi { namespace elements
          cairo_font_extents_t font_extents;
          cairo_scaled_font_extents(cairo_get_scaled_font(&_context), &font_extents);
 
+         point p = p_;
          switch (align & 0x3)
          {
             case canvas::text_alignment::right:
@@ -295,18 +296,18 @@ namespace cycfi { namespace elements
       }
    }
 
-   void canvas::fill_text(point p, char const* utf8)
+   void canvas::fill_text(point const& p_, char const* utf8)
    {
       apply_fill_style();
-      p = get_text_start(_context, p, _state.align, utf8);
+      auto p = get_text_start(_context, p_, _state.align, utf8);
       cairo_move_to(&_context, p.x, p.y);
       cairo_show_text(&_context, utf8);
    }
 
-   void canvas::stroke_text(point p, char const* utf8)
+   void canvas::stroke_text(point const& p_, char const* utf8)
    {
       apply_stroke_style();
-      p = get_text_start(_context, p, _state.align, utf8);
+      auto p = get_text_start(_context, p_, _state.align, utf8);
       cairo_move_to(&_context, p.x, p.y);
       cairo_text_path(&_context, utf8);
       stroke();

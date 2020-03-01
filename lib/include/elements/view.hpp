@@ -33,11 +33,11 @@ namespace cycfi { namespace elements
                               view(window& win);
                               ~view();
 
-      void                    draw(cairo_t* ctx, rect area) override;
+      void                    draw(cairo_t* ctx, rect const& area) override;
       void                    click(mouse_button btn) override;
       void                    drag(mouse_button btn) override;
-      void                    cursor(point p, cursor_tracking status) override;
-      void                    scroll(point dir, point p) override;
+      void                    cursor(point const& p, cursor_tracking status) override;
+      void                    scroll(point const& dir, point const& p) override;
       void                    key(key_info const& k) override;
       void                    text(text_info const& info) override;
       void                    begin_focus() override;
@@ -50,7 +50,7 @@ namespace cycfi { namespace elements
       void                    scale(float val);
 
       void                    refresh() override;
-      void                    refresh(rect area) override;
+      void                    refresh(rect const& area) override;
       void                    refresh(element& element, int outward = 0);
       void                    refresh(context const& ctx, int outward = 0);
       rect                    dirty() const;

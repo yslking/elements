@@ -21,7 +21,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   element* composite_base::hit_test(context const& ctx, point p)
+   element* composite_base::hit_test(context const& ctx, point const& p)
    {
       if (!empty())
       {
@@ -211,7 +211,7 @@ namespace cycfi { namespace elements
 
    namespace
    {
-      void cursor_leaving(context const& ctx, point p, composite_base::hit_info& _cursor_info)
+      void cursor_leaving(context const& ctx, point const& p, composite_base::hit_info& _cursor_info)
       {
          context ectx{ ctx, _cursor_info.element, _cursor_info.bounds };
          _cursor_info.element->cursor(ectx, p, cursor_tracking::leaving);
@@ -219,7 +219,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   bool composite_base::cursor(context const& ctx, point p, cursor_tracking status)
+   bool composite_base::cursor(context const& ctx, point const& p, cursor_tracking status)
    {
       if (status == cursor_tracking::leaving && _cursor_info.element)
       {
@@ -253,7 +253,7 @@ namespace cycfi { namespace elements
       return false;
    }
 
-   bool composite_base::scroll(context const& ctx, point dir, point p)
+   bool composite_base::scroll(context const& ctx, point const& dir, point const& p)
    {
       if (!empty())
       {
@@ -316,7 +316,7 @@ namespace cycfi { namespace elements
          _focus = int(index);
    }
 
-   composite_base::hit_info composite_base::hit_element(context const& ctx, point p) const
+   composite_base::hit_info composite_base::hit_element(context const& ctx, point const& p) const
    {
       for (std::size_t ix = 0; ix < size(); ++ix)
       {

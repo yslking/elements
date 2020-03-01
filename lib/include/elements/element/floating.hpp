@@ -16,7 +16,7 @@ namespace cycfi { namespace elements
    class floating_element : public proxy_base
    {
    public:
-                              floating_element(rect bounds)
+                              floating_element(rect const& bounds)
                                : _bounds(bounds)
                               {}
 
@@ -33,7 +33,7 @@ namespace cycfi { namespace elements
 
    template <typename Subject>
    inline proxy<Subject, floating_element>
-   floating(rect bounds, Subject&& subject)
+   floating(rect const& bounds, Subject&& subject)
    {
       return { std::forward<Subject>(subject), bounds };
    }

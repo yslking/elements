@@ -8,7 +8,7 @@
 
 namespace cycfi { namespace elements
 {
-   void draw_icon(canvas& cnv, rect bounds, uint32_t code, float size, color c)
+   void draw_icon(canvas& cnv, rect const& bounds, uint32_t code, float size, color c)
    {
       auto  state = cnv.new_state();
       auto& thm = get_theme();
@@ -20,7 +20,7 @@ namespace cycfi { namespace elements
       cnv.fill_text(point{ cx, cy }, codepoint_to_utf8(code).c_str());
    }
 
-   void draw_icon(canvas& cnv, rect bounds, uint32_t code, float size)
+   void draw_icon(canvas& cnv, rect const& bounds, uint32_t code, float size)
    {
       draw_icon(cnv, bounds, code, size, get_theme().icon_color);
    }

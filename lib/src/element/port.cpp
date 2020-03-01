@@ -33,7 +33,7 @@ namespace cycfi { namespace elements
 
    namespace
    {
-      void draw_scrollbar_fill(canvas& _canvas, rect r, color fill_color)
+      void draw_scrollbar_fill(canvas& _canvas, rect const& r, color fill_color)
       {
          _canvas.begin_path();
          _canvas.rect(r);
@@ -42,8 +42,8 @@ namespace cycfi { namespace elements
       }
 
       void draw_scrollbar(
-         canvas& _canvas, rect b, float radius,
-         color outline_color, color fill_color, point mp,
+         canvas& _canvas, rect const& b, float radius,
+         color outline_color, color fill_color, point const& mp,
          bool is_tracking
       )
       {
@@ -62,7 +62,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   void scroller_base::draw_scroll_bar(context const& ctx, scrollbar_info const& info, point mp)
+   void scroller_base::draw_scroll_bar(context const& ctx, scrollbar_info const& info, point const& mp)
    {
       theme const& thm = get_theme();
 
@@ -122,7 +122,7 @@ namespace cycfi { namespace elements
       };
    }
 
-   element* scroller_base::hit_test(context const& ctx, point p)
+   element* scroller_base::hit_test(context const& ctx, point const& p)
    {
       return element::hit_test(ctx, p);
    }
@@ -184,7 +184,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   bool scroller_base::scroll(context const& ctx, point dir, point /* p */)
+   bool scroller_base::scroll(context const& ctx, point const& dir, point const& /* p */)
    {
       view_limits e_limits = subject().limits(ctx);
       bool redraw = false;
@@ -257,11 +257,12 @@ namespace cycfi { namespace elements
       }
    }
 
-   bool scroller_base::reposition(context const& ctx, point p)
+   bool scroller_base::reposition(context const& ctx, point const& p_)
    {
       if (!has_scrollbars())
          return false;
 
+      point             p = p_;
       scrollbar_bounds  sb = get_scrollbar_bounds(ctx);
       view_limits       e_limits = subject().limits(ctx);
 
@@ -362,7 +363,7 @@ namespace cycfi { namespace elements
       return false;
    }
 
-   bool scroller_base::cursor(context const& ctx, point p, cursor_tracking status)
+   bool scroller_base::cursor(context const& ctx, point const& p, cursor_tracking status)
    {
       if (has_scrollbars())
       {
@@ -382,7 +383,7 @@ namespace cycfi { namespace elements
       return true;
    }
 
-   bool scroller_base::scroll_into_view(context const& ctx, rect r)
+   bool scroller_base::scroll_into_view(context const& ctx, rect const& r)
    {
       rect bounds = ctx.bounds;
 

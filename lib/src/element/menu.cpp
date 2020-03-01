@@ -206,7 +206,7 @@ namespace cycfi { namespace elements
       }
    }
 
-   element* basic_menu_item_element::hit_test(context const& ctx, point p)
+   element* basic_menu_item_element::hit_test(context const& ctx, point const& p)
    {
       if (is_enabled() && ctx.bounds.includes(p))
          return this;
@@ -329,7 +329,7 @@ namespace cycfi { namespace elements
       return false;
    }
 
-   bool basic_menu_item_element::cursor(context const& ctx, point p, cursor_tracking status)
+   bool basic_menu_item_element::cursor(context const& ctx, point const& p, cursor_tracking status)
    {
       if (!is_enabled())
          return false;

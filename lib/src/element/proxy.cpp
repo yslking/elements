@@ -22,9 +22,10 @@ namespace cycfi { namespace elements
       return subject().stretch();
    }
 
-   element* proxy_base::hit_test(context const& ctx, point p)
+   element* proxy_base::hit_test(context const& ctx, point const& p_)
    {
       context sctx { ctx, &subject(), ctx.bounds };
+      point   p = p_;
       prepare_subject(sctx, p);
       auto r = subject().hit_test(sctx, p);
       restore_subject(sctx);
@@ -110,8 +111,9 @@ namespace cycfi { namespace elements
       return r;
    }
 
-   bool proxy_base::cursor(context const& ctx, point p, cursor_tracking status)
+   bool proxy_base::cursor(context const& ctx, point const& p_, cursor_tracking status)
    {
+      point   p = p_;
       context sctx { ctx, &subject(), ctx.bounds };
       prepare_subject(sctx, p);
       auto r = subject().cursor(sctx, p, status);
@@ -119,8 +121,9 @@ namespace cycfi { namespace elements
       return r;
    }
 
-   bool proxy_base::scroll(context const& ctx, point dir, point p)
+   bool proxy_base::scroll(context const& ctx, point const& dir, point const& p_)
    {
+      point   p = p_;
       context sctx { ctx, &subject(), ctx.bounds };
       prepare_subject(sctx, p);
       auto r = subject().scroll(sctx, dir, p);

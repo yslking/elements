@@ -49,7 +49,7 @@ namespace cycfi { namespace elements
    ////////////////////////////////////////////////////////////////////////////
    namespace
    {
-      void gizmo_parts(rect src, rect dest, rect parts[9])
+      void gizmo_parts(rect const& src, rect const& dest, rect parts[9])
       {
          // Subdivide a rect into 9 parts. src is the original size and dest
          // is the resized rect. The 9 patches have a 1-pixel overlap to
@@ -72,7 +72,7 @@ namespace cycfi { namespace elements
          parts[8] = dest.inset(div_h-1, div_v-1);
       }
 
-      void hgizmo_parts(rect src, rect dest, rect parts[3])
+      void hgizmo_parts(rect const& src, rect const& dest, rect parts[3])
       {
          // Variation of gizmo_parts allowing horizontal resizing only.
 
@@ -84,7 +84,7 @@ namespace cycfi { namespace elements
          parts[2] = max(parts[0], parts[1]).inset(div_h, 0);
       }
 
-      void vgizmo_parts(rect src, rect dest, rect parts[9])
+      void vgizmo_parts(rect const& src, rect const& dest, rect parts[9])
       {
          // Variation of gizmo_parts allowing vertical resizing only.
 
