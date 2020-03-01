@@ -55,6 +55,7 @@ namespace cycfi { namespace elements
       void              stroke();
       void              stroke_preserve();
       void              clip();
+      elements::rect    clip_extent() const;
       bool              hit_test(point p) const;
       elements::rect    fill_extent() const;
 
