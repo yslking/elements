@@ -29,12 +29,23 @@ std::size_t composer::size() const
 element_ptr composer::compose(std::size_t index)
 {
    auto text = "This is item number " + std::to_string(index);
-   return share(margin({ 20, 2, 20, 2 }, align_left(label(text))));
+   auto check_text = "Check out " + std::to_string(index);
+   auto cbox = share(check_box(check_text));
+   cbox->value(true);
+
+   return share(
+      margin({ 20, 2, 20, 2 },
+         htile(
+            align_left(label(text)),
+            left_margin(10, hold(cbox))
+         )
+      )
+   );
 }
 
 composer::limits composer::width_limits() const
 {
-   return { 220, full_extent };
+   return { 600, full_extent };
 }
 
 double composer::line_height(std::size_t index) const
