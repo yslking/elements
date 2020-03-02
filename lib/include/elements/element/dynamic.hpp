@@ -51,12 +51,13 @@ namespace cycfi { namespace elements
          double                  pos;
          double                  height;
          element_ptr             elem_ptr;
+         int                     layout_id = -1;
       };
 
       composer_ptr               _composer;
       std::vector<row_info>      _rows;
-      bool                       _needs_layout = true;
-      rect                       _previous_bounds;
+      point                      _previous_size;
+      int                        _layout_id = 0;
    };
 }}
 

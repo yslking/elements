@@ -23,7 +23,7 @@ public:
 
 std::size_t composer::size() const
 {
-   return 10000;
+   return 100000;
 }
 
 element_ptr composer::compose(std::size_t index)

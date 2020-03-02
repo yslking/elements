@@ -48,27 +48,35 @@ namespace cycfi { namespace elements
 
       for (; it != _rows.end(); ++it)
       {
-         auto const& row = *it;
+         auto& row = *it;
          context rctx { ctx, row.elem_ptr.get(), ctx.bounds };
          rctx.bounds.top = top + row.pos;
          rctx.bounds.height(row.height);
          if (intersects(clip_extent, rctx.bounds))
          {
-            if (_needs_layout)
+            if (row.layout_id != _layout_id)
+            {
                row.elem_ptr->layout(rctx);
+               row.layout_id = _layout_id;
+            }
             row.elem_ptr->draw(rctx);
          }
          if (rctx.bounds.bottom > clip_extent.bottom)
             break;
       }
-      _needs_layout = false;
-      _previous_bounds = ctx.bounds;
+      _previous_size.x = ctx.bounds.width();
+      _previous_size.y = ctx.bounds.height();
    }
 
    void dynamic::layout(context const& ctx)
    {
-      if (_previous_bounds != ctx.bounds)
-         _needs_layout = true;
+      if (_previous_size.x != ctx.bounds.width() ||
+         _previous_size.y != ctx.bounds.height())
+      {
+         _previous_size.x = ctx.bounds.width();
+         _previous_size.y = ctx.bounds.height();
+         ++_layout_id;
+      }
    }
 
    void dynamic::build()
@@ -87,7 +95,7 @@ namespace cycfi { namespace elements
             }
          }
       }
-      _needs_layout = true;
+      ++_layout_id;
    }
 }}
 
