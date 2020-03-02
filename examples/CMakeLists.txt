@@ -17,6 +17,7 @@ add_subdirectory(dialogs)
 add_subdirectory(scale)
 add_subdirectory(typography)
 add_subdirectory(aspects)
+add_subdirectory(dynamic)
 
 
 

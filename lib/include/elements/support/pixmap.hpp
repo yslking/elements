@@ -38,7 +38,7 @@ namespace cycfi { namespace elements
       pixmap&           operator=(pixmap&& rhs);
 
       extent            size() const;
-      double             scale() const;
+      double            scale() const;
       void              scale(double val);
 
    private:

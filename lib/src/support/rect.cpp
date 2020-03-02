@@ -11,13 +11,8 @@ namespace cycfi { namespace elements
 {
    bool intersects(rect const& a, rect const& b)
    {
-      if (!is_valid(a) || !is_valid(b))
-         return false;
-
-      return
-         (std::max(b.left, b.left) <= std::min(b.right, b.right)) &&
-         (std::max(b.top, b.top) <= std::min(b.bottom, b.bottom))
-         ;
+      return (a.left < b.right) && (a.right > b.left) &&
+             (a.top < b.bottom) && (a.bottom > b.top);
    }
 
    rect max(rect const& a, rect const& b)

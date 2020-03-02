@@ -12,6 +12,7 @@ set(ELEMENTS_SOURCES
    src/element/button.cpp
    src/element/composite.cpp
    src/element/dial.cpp
+   src/element/dynamic.cpp
    src/element/element.cpp
    src/element/floating.cpp
    src/element/flow.cpp
@@ -50,6 +51,7 @@ set(ELEMENTS_HEADERS
    include/elements/element/button.hpp
    include/elements/element/composite.hpp
    include/elements/element/dial.hpp
+   include/elements/element/dynamic.hpp
    include/elements/element/element.hpp
    include/elements/element/receiver.hpp
    include/elements/element/floating.hpp
