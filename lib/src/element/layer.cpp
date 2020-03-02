@@ -33,11 +33,12 @@ namespace cycfi { namespace elements
 
    void layer_element::layout(context const& ctx)
    {
-      if (_previous_size.x != ctx.bounds.width() ||
-         _previous_size.y != ctx.bounds.height())
+      auto width = ctx.bounds.width();
+      auto height = ctx.bounds.height();
+      if (_previous_size.x != width || _previous_size.y != height)
       {
-         _previous_size.x = ctx.bounds.width();
-         _previous_size.y = ctx.bounds.height();
+         _previous_size.x = width;
+         _previous_size.y = height;
          for (std::size_t ix = 0; ix != size(); ++ix)
          {
             auto& e = at(ix);

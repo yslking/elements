@@ -70,11 +70,12 @@ namespace cycfi { namespace elements
 
    void dynamic::layout(context const& ctx)
    {
-      if (_previous_size.x != ctx.bounds.width() ||
-         _previous_size.y != ctx.bounds.height())
+      auto width = ctx.bounds.width();
+      auto height = ctx.bounds.height();
+      if (_previous_size.x != width || _previous_size.y != height)
       {
-         _previous_size.x = ctx.bounds.width();
-         _previous_size.y = ctx.bounds.height();
+         _previous_size.x = width;
+         _previous_size.y = height;
          ++_layout_id;
       }
    }
