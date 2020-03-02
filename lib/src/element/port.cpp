@@ -432,10 +432,10 @@ namespace cycfi { namespace elements
    {
       if (has_scrollbars())
       {
-         ctx.view.refresh(ctx);
          scrollbar_bounds sb = get_scrollbar_bounds(ctx);
          if (sb.hscroll_bounds.includes(p) || sb.vscroll_bounds.includes(p))
          {
+            ctx.view.refresh(ctx);
             set_cursor(cursor_type::arrow);
             return true;
          }
