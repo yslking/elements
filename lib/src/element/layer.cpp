@@ -33,18 +33,22 @@ namespace cycfi { namespace elements
 
    void layer_element::layout(context const& ctx)
    {
-      bounds = ctx.bounds;
-      for (std::size_t ix = 0; ix != size(); ++ix)
+      if (_previous_size.x != ctx.bounds.width() ||
+         _previous_size.y != ctx.bounds.height())
       {
-         auto& e = at(ix);
-         e.layout(context{ ctx, &e, bounds_of(ctx, ix) });
+         _previous_size.x = ctx.bounds.width();
+         _previous_size.y = ctx.bounds.height();
+         for (std::size_t ix = 0; ix != size(); ++ix)
+         {
+            auto& e = at(ix);
+            e.layout(context{ ctx, &e, bounds_of(ctx, ix) });
+         }
       }
    }
 
    void layer_element::draw(context const& ctx)
    {
-      if (ctx.bounds != bounds)
-         layout(ctx);
+      layout(ctx);
       composite_base::draw(ctx);
    }
 
@@ -70,8 +74,10 @@ namespace cycfi { namespace elements
 
    rect layer_element::bounds_of(context const& ctx, std::size_t index) const
    {
-      double width = ctx.bounds.width();
-      double height = ctx.bounds.height();
+      auto left = ctx.bounds.left;
+      auto top = ctx.bounds.top;
+      auto width = ctx.bounds.width();
+      auto height = ctx.bounds.height();
       auto  limits = at(index).limits(ctx);
 
       clamp_min(width, limits.min.x);
@@ -79,7 +85,7 @@ namespace cycfi { namespace elements
       clamp_min(height, limits.min.y);
       clamp_max(height, limits.max.y);
 
-      return { bounds.left, bounds.top, bounds.left + width, bounds.top + height };
+      return { left, top, left+width, top+height };
    }
 
    void layer_element::begin_focus()
