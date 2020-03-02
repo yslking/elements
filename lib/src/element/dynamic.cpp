@@ -61,7 +61,7 @@ namespace cycfi { namespace elements
             }
             row.elem_ptr->draw(rctx);
          }
-         if (rctx.bounds.bottom > clip_extent.bottom)
+         if (rctx.bounds.top > clip_extent.bottom)
             break;
       }
       _previous_size.x = ctx.bounds.width();
