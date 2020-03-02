@@ -34,7 +34,7 @@ element_ptr composer::compose(std::size_t index)
 
 composer::limits composer::width_limits() const
 {
-   return { 200, full_extent };
+   return { 220, full_extent };
 }
 
 double composer::line_height(std::size_t index) const

@@ -30,21 +30,36 @@ namespace cycfi { namespace elements
       auto& cnv = ctx.canvas;
       auto  state = cnv.new_state();
       auto  clip_extent = cnv.clip_extent();
-      auto  y = ctx.bounds.top;
+      auto  top = ctx.bounds.top;
 
       cnv.rect(ctx.bounds);
       cnv.clip();
-      for (auto const& row : _rows)
+
+      if (!intersects(ctx.bounds, clip_extent))
+         return;
+
+      auto it = std::lower_bound(_rows.begin(), _rows.end(),
+         clip_extent.top-top,
+         [](auto const& row, double pivot)
+         {
+            return (row.pos + row.height) < pivot;
+         }
+      );
+
+      for (; it != _rows.end(); ++it)
       {
-         context rctx { ctx, row.second.get(), ctx.bounds };
-         rctx.bounds.top = y;
-         rctx.bounds.bottom = (y += row.first);
+         auto const& row = *it;
+         context rctx { ctx, row.elem_ptr.get(), ctx.bounds };
+         rctx.bounds.top = top + row.pos;
+         rctx.bounds.height(row.height);
          if (intersects(clip_extent, rctx.bounds))
          {
             if (_needs_layout)
-               row.second->layout(rctx);
-            row.second->draw(rctx);
+               row.elem_ptr->layout(rctx);
+            row.elem_ptr->draw(rctx);
          }
+         if (rctx.bounds.bottom > clip_extent.bottom)
+            break;
       }
       _needs_layout = false;
       _previous_bounds = ctx.bounds;
@@ -62,14 +77,14 @@ namespace cycfi { namespace elements
       {
          if (auto size = _composer->size())
          {
+            double y = 0;
             _rows.reserve(_composer->size());
             for (std::size_t i = 0; i != size; ++i)
-               _rows.push_back(
-                  std::pair{
-                     _composer->line_height(i)
-                   , _composer->compose(i)
-                  }
-               );
+            {
+               auto line_height = _composer->line_height(i);
+               _rows.push_back({ y, line_height, _composer->compose(i) });
+               y += line_height;
+            }
          }
       }
       _needs_layout = true;

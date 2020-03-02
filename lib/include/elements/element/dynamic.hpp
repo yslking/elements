@@ -9,7 +9,6 @@
 #include <elements/element/element.hpp>
 #include <memory>
 #include <vector>
-#include <utility>
 
 namespace cycfi { namespace elements
 {
@@ -47,7 +46,12 @@ namespace cycfi { namespace elements
 
    private:
 
-      using row_info = std::pair<double, element_ptr>;
+      struct row_info
+      {
+         double                  pos;
+         double                  height;
+         element_ptr             elem_ptr;
+      };
 
       composer_ptr               _composer;
       std::vector<row_info>      _rows;
