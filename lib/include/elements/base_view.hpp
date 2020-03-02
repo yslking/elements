@@ -65,7 +65,7 @@ namespace cycfi { namespace elements
       double   y;
    };
 
-   constexpr double        full_extent    = 1E6;
+   constexpr double        full_extent    = 1E300;
    constexpr view_limits   full_limits    = { { 0.0, 0.0 }, { full_extent, full_extent } };
 
    ////////////////////////////////////////////////////////////////////////////
