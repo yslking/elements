@@ -7,7 +7,6 @@
 #define ELEMENTS_PORT_APRIL_24_2016
 
 #include <elements/element/proxy.hpp>
-#include <elements/view.hpp>
 #include <memory>
 
 namespace cycfi { namespace elements
@@ -19,64 +18,59 @@ namespace cycfi { namespace elements
    {
    public:
 
-      virtual double          halign() const = 0;
-      virtual void            halign(double val) = 0;
-      virtual double          valign() const = 0;
-      virtual void            valign(double val) = 0;
-   };
+      port_base()
+       : _halign(0.0)
+       , _valign(0.0)
+      {}
 
-   template <typename Base>
-   class port_element : public Base
-   {
-   public:
-
-      using Base::Base;
+      ~port_base() {}
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
       void                    draw(context const& ctx) override;
 
-      double                  halign() const override       { return _halign; }
-      void                    halign(double val) override   { _halign = val; }
-      double                  valign() const override       { return _valign; }
-      void                    valign(double val) override   { _valign = val; }
+      double                  halign() const { return _halign; }
+      void                    halign(double val) { _halign = val; }
+      double                  valign() const { return _valign; }
+      void                    valign(double val) { _valign = val; }
 
    private:
 
-      double                  _halign = 0.0;
-      double                  _valign = 0.0;
+      double                  _halign;
+      double                  _valign;
    };
 
    template <typename Subject>
-   inline proxy<Subject, port_element<port_base>>
+   inline proxy<Subject, port_base>
    port(Subject&& subject)
    {
       return { std::forward<Subject>(subject) };
    }
 
-   template <typename Base>
-   class vport_element : public Base
+   class vport_base : public proxy_base
    {
    public:
 
-      using Base::Base;
+      vport_base()
+       : _valign(0.0)
+      {}
+
+      ~vport_base() {}
 
       view_limits             limits(basic_context const& ctx) const override;
       void                    prepare_subject(context& ctx) override;
       void                    draw(context const& ctx) override;
 
-      double                  halign() const override       { return 0; }
-      void                    halign(double val) override   {}
-      double                  valign() const override       { return _valign; }
-      void                    valign(double val) override   { _valign = val; }
+      double                  valign() const { return _valign; }
+      void                    valign(double val) { _valign = val; }
 
    private:
 
-      double                  _valign = 0.0;
+      double                  _valign;
    };
 
    template <typename Subject>
-   inline proxy<Subject, vport_element<port_base>>
+   inline proxy<Subject, vport_base>
    vport(Subject&& subject)
    {
       return { std::forward<Subject>(subject) };
@@ -188,94 +182,24 @@ namespace cycfi { namespace elements
    };
 
    template <typename Subject>
-   inline proxy<Subject, port_element<scroller_base>>
+   inline proxy<Subject, scroller_base>
    scroller(Subject&& subject, int traits = 0)
    {
       return { std::forward<Subject>(subject), traits };
    }
 
    template <typename Subject>
-   inline proxy<Subject, port_element<scroller_base>>
+   inline proxy<Subject, scroller_base>
    vscroller(Subject&& subject, int traits = 0)
    {
       return { std::forward<Subject>(subject), traits | no_hscroll };
    }
 
    template <typename Subject>
-   inline proxy<Subject, port_element<scroller_base>>
+   inline proxy<Subject, scroller_base>
    hscroller(Subject&& subject, int traits = 0)
    {
       return { std::forward<Subject>(subject), traits | no_vscroll };
-   }
-
-   ////////////////////////////////////////////////////////////////////////////
-   // port_base class implementation
-   ////////////////////////////////////////////////////////////////////////////
-   constexpr auto min_port_size = 32;
-
-   template <typename Base>
-   inline view_limits port_element<Base>::limits(basic_context const& ctx) const
-   {
-      view_limits e_limits = this->subject().limits(ctx);
-      return {{ min_port_size, min_port_size }, e_limits.max };
-   }
-
-   template <typename Base>
-   inline void port_element<Base>::prepare_subject(context& ctx)
-   {
-      view_limits    e_limits          = this->subject().limits(ctx);
-      double         elem_width        = e_limits.min.x;
-      double         elem_height       = e_limits.min.y;
-      double         available_width   = ctx.parent->bounds.width();
-      double         available_height  = ctx.parent->bounds.height();
-
-      ctx.bounds.left -= (elem_width - available_width) * _halign;
-      ctx.bounds.width(elem_width);
-      ctx.bounds.top -= (elem_height - available_height) * _valign;
-      ctx.bounds.height(elem_height);
-
-      this->subject().layout(ctx);
-   }
-
-   template <typename Base>
-   inline void port_element<Base>::draw(context const& ctx)
-   {
-      auto state = ctx.canvas.new_state();
-      ctx.canvas.rect(ctx.bounds);
-      ctx.canvas.clip();
-      Base::draw(ctx);
-   }
-
-   ////////////////////////////////////////////////////////////////////////////
-   // vport_base class implementation
-   ////////////////////////////////////////////////////////////////////////////
-   template <typename Base>
-   inline view_limits vport_element<Base>::limits(basic_context const& ctx) const
-   {
-      view_limits e_limits = this->subject().limits(ctx);
-      return {{ e_limits.min.x, min_port_size }, e_limits.max };
-   }
-
-   template <typename Base>
-   inline void vport_element<Base>::prepare_subject(context& ctx)
-   {
-      view_limits    e_limits          = this->subject().limits(ctx);
-      double         elem_height       = e_limits.min.y;
-      double         available_height  = ctx.parent->bounds.height();
-
-      ctx.bounds.top -= (elem_height - available_height) * _valign;
-      ctx.bounds.height(elem_height);
-
-      this->subject().layout(ctx);
-   }
-
-   template <typename Base>
-   inline void vport_element<Base>::draw(context const& ctx)
-   {
-      auto state = ctx.canvas.new_state();
-      ctx.canvas.rect(ctx.bounds);
-      ctx.canvas.clip();
-      Base::draw(ctx);
    }
 }}
 

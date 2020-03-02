@@ -4,11 +4,76 @@
    Distributed under the MIT License [ https://opensource.org/licenses/MIT ]
 =============================================================================*/
 #include <elements/element/port.hpp>
+#include <elements/view.hpp>
 #include <algorithm>
 #include <cmath>
 
 namespace cycfi { namespace elements
 {
+   constexpr auto min_port_size = 32;
+
+   ////////////////////////////////////////////////////////////////////////////
+   // port_base class implementation
+   ////////////////////////////////////////////////////////////////////////////
+   view_limits port_base::limits(basic_context const& ctx) const
+   {
+      view_limits e_limits = subject().limits(ctx);
+      return {{ min_port_size, min_port_size }, e_limits.max };
+   }
+
+   void port_base::prepare_subject(context& ctx)
+   {
+      view_limits    e_limits          = subject().limits(ctx);
+      double         elem_width        = e_limits.min.x;
+      double         elem_height       = e_limits.min.y;
+      double         available_width   = ctx.parent->bounds.width();
+      double         available_height  = ctx.parent->bounds.height();
+
+      ctx.bounds.left -= (elem_width - available_width) * _halign;
+      ctx.bounds.width(elem_width);
+      ctx.bounds.top -= (elem_height - available_height) * _valign;
+      ctx.bounds.height(elem_height);
+
+      subject().layout(ctx);
+   }
+
+   void port_base::draw(context const& ctx)
+   {
+      auto state = ctx.canvas.new_state();
+      ctx.canvas.rect(ctx.bounds);
+      ctx.canvas.clip();
+      proxy_base::draw(ctx);
+   }
+
+   ////////////////////////////////////////////////////////////////////////////
+   // vport_base class implementation
+   ////////////////////////////////////////////////////////////////////////////
+   view_limits vport_base::limits(basic_context const& ctx) const
+   {
+      view_limits e_limits = subject().limits(ctx);
+      return {{e_limits.min.x, min_port_size }, e_limits.max };
+   }
+
+   void vport_base::prepare_subject(context& ctx)
+   {
+      view_limits    e_limits          = subject().limits(ctx);
+      double         elem_height       = e_limits.min.y;
+      double         available_height  = ctx.parent->bounds.height();
+
+      ctx.bounds.top -= (elem_height - available_height) * _valign;
+      ctx.bounds.height(elem_height);
+
+      subject().layout(ctx);
+   }
+
+   void vport_base::draw(context const& ctx)
+   {
+      auto state = ctx.canvas.new_state();
+      ctx.canvas.rect(ctx.bounds);
+      ctx.canvas.clip();
+      proxy_base::draw(ctx);
+   }
+
    ////////////////////////////////////////////////////////////////////////////
    // scrollable class implementation
    ////////////////////////////////////////////////////////////////////////////
