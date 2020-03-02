@@ -54,7 +54,7 @@ namespace cycfi { namespace elements
          rctx.bounds.height(row.height);
          if (intersects(clip_extent, rctx.bounds))
          {
-            //if (row.layout_id != _layout_id)
+            if (row.layout_id != _layout_id)
             {
                row.elem_ptr->layout(rctx);
                row.layout_id = _layout_id;
