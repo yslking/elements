@@ -74,8 +74,9 @@ namespace cycfi { namespace elements
 
    void vtile_element::layout(context const& ctx)
    {
-      _left = ctx.bounds.left;
-      _right = ctx.bounds.right;
+      auto left = ctx.bounds.left;
+      auto right = ctx.bounds.right;
+      auto top = ctx.bounds.top;
       _tiles.resize(size()+1);
 
       double const height = ctx.bounds.height();
@@ -102,7 +103,7 @@ namespace cycfi { namespace elements
 
       // Now we have the final layout. We can now layout the individual
       // elements.
-      double curr = ctx.bounds.top;
+      double curr = 0;
       auto iter = _tiles.begin();
       std::size_t i = 0;
       for (auto const& info : info)
@@ -112,17 +113,20 @@ namespace cycfi { namespace elements
          curr += info.alloc;
 
          auto& elem = at(i++);
-         rect ebounds = { _left, prev, _right, curr };
+         rect ebounds = { left, prev+top, right, curr+top };
          elem.layout(context{ ctx, &elem, ebounds });
       }
       *iter = curr;
    }
 
-   rect vtile_element::bounds_of(context const& /* ctx */, std::size_t index) const
+   rect vtile_element::bounds_of(context const& ctx, std::size_t index) const
    {
       if (index >= _tiles.size())
          return {};
-      return rect{ _left, _tiles[index], _right, _tiles[index+1] };
+      auto left = ctx.bounds.left;
+      auto right = ctx.bounds.right;
+      auto top = ctx.bounds.top;
+      return rect{ left, _tiles[index]+top, right, _tiles[index+1]+top };
    }
 
    ////////////////////////////////////////////////////////////////////////////
@@ -148,8 +152,9 @@ namespace cycfi { namespace elements
 
    void htile_element::layout(context const& ctx)
    {
-      _top = ctx.bounds.top;
-      _bottom = ctx.bounds.bottom;
+      auto top = ctx.bounds.top;
+      auto bottom = ctx.bounds.bottom;
+      auto left = ctx.bounds.left;
       _tiles.resize(size()+1);
 
       double const width = ctx.bounds.width();
@@ -176,7 +181,7 @@ namespace cycfi { namespace elements
 
       // Now we have the final layout. We can now layout the individual
       // elements.
-      double curr = ctx.bounds.left;
+      double curr = 0;
       auto iter = _tiles.begin();
       std::size_t i = 0;
       for (auto const& info : info)
@@ -186,16 +191,19 @@ namespace cycfi { namespace elements
          curr += info.alloc;
 
          auto& elem = at(i++);
-         rect ebounds = { prev, _top, curr, _bottom };
+         rect ebounds = { prev+left, top, curr+left, bottom };
          elem.layout(context{ ctx, &elem, ebounds });
       }
       *iter = curr;
    }
 
-   rect htile_element::bounds_of(context const& /* ctx */, std::size_t index) const
+   rect htile_element::bounds_of(context const& ctx, std::size_t index) const
    {
       if (index >= _tiles.size())
          return {};
-      return rect{ _tiles[index], _top, _tiles[index + 1], _bottom };
+      auto top = ctx.bounds.top;
+      auto bottom = ctx.bounds.bottom;
+      auto left = ctx.bounds.left;
+      return rect{ _tiles[index]+left, top, _tiles[index + 1]+left, bottom };
    }
 }}
