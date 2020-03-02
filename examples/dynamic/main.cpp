@@ -15,10 +15,10 @@ class composer : public dynamic::composer
 {
 public:
 
-   std::size_t       size() const;
-   element_ptr       compose(std::size_t index);
-   limits            width_limits() const;
-   double            line_height(std::size_t index) const;
+   std::size_t       size() const override;
+   element_ptr       compose(std::size_t index) override;
+   limits            width_limits() const override;
+   double            line_height(std::size_t index) const override;
 };
 
 std::size_t composer::size() const
