@@ -116,7 +116,7 @@ if (APPLE)
       host/macos/key.mm
       host/macos/window.mm
    )
-elseif (UNIX)
+elseif (UNIX OR MINGW)
    set(ELEMENTS_HOST
       host/linux/app.cpp
       host/linux/base_view.cpp
@@ -160,7 +160,7 @@ target_compile_features(elements PUBLIC cxx_std_17)
 
 if(IPO_SUPPORTED AND CMAKE_BUILD_TYPE STREQUAL "Release")
    message(STATUS "Enabling LTO for elements")
-   set_target_properties(elements PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+   set_target_properties(elements PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
 endif()
 
 if (NOT MSVC)
@@ -228,7 +228,7 @@ endif()
 ###############################################################################
 # GTK (linux only)
 
-if (UNIX AND NOT APPLE)
+if (UNIX AND NOT APPLE OR MINGW)
    pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
    target_link_libraries(elements PRIVATE PkgConfig::GTK3)
 endif()

@@ -1,0 +1,160 @@
+diff --git a/CMakeMain.txt b/CMakeMain.txt
+index 1c75719..c403f1e 100644
+--- a/CMakeMain.txt
++++ b/CMakeMain.txt
+@@ -6,7 +6,7 @@
+ 
+ project(${ELEMENTS_APP_PROJECT} LANGUAGES CXX)
+ 
+-if (UNIX AND NOT APPLE)
++if (UNIX AND NOT APPLE OR MINGW)
+    set(LINUX TRUE)
+ endif()
+ 
+@@ -70,7 +70,7 @@ if (APPLE)
+       ${ELEMENTS_RESOURCES}
+       ${ELEMENTS_APP_RESOURCES}
+    )
+-elseif (UNIX)
++elseif (UNIX OR MINGW)
+    add_executable(
+       ${ELEMENTS_APP_PROJECT}
+       ${ELEMENTS_APP_SOURCES}
+@@ -177,5 +177,5 @@ if (APPLE)
+ endif()
+ 
+ if(IPO_SUPPORTED AND CMAKE_BUILD_TYPE STREQUAL "Release")
+-   set_target_properties(${ELEMENTS_APP_PROJECT} PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
++   set_target_properties(${ELEMENTS_APP_PROJECT} PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+ endif()
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 791ad10..ecd35aa 100755
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -116,7 +116,7 @@ if (APPLE)
+       host/macos/key.mm
+       host/macos/window.mm
+    )
+-elseif (UNIX)
++elseif (UNIX OR MINGW)
+    set(ELEMENTS_HOST
+       host/linux/app.cpp
+       host/linux/base_view.cpp
+@@ -160,7 +160,7 @@ target_compile_features(elements PUBLIC cxx_std_17)
+ 
+ if(IPO_SUPPORTED AND CMAKE_BUILD_TYPE STREQUAL "Release")
+    message(STATUS "Enabling LTO for elements")
+-   set_target_properties(elements PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
++   set_target_properties(elements PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+ endif()
+ 
+ if (NOT MSVC)
+@@ -228,7 +228,7 @@ endif()
+ ###############################################################################
+ # GTK (linux only)
+ 
+-if (UNIX AND NOT APPLE)
++if (UNIX AND NOT APPLE OR MINGW)
+    pkg_check_modules(GTK3 REQUIRED IMPORTED_TARGET gtk+-3.0)
+    target_link_libraries(elements PRIVATE PkgConfig::GTK3)
+ endif()
+diff --git a/lib/include/elements/app.hpp b/lib/include/elements/app.hpp
+index ae6853f..187bd4f 100755
+--- a/lib/include/elements/app.hpp
++++ b/lib/include/elements/app.hpp
+@@ -9,7 +9,7 @@
+ #include <string>
+ #include <infra/support.hpp>
+ 
+-#if defined(__linux__)
++#if defined(__linux__) || defined(__MINGW32__)
+ using GtkApplication = struct _GtkApplication;
+ #endif
+ 
+@@ -32,10 +32,10 @@ namespace cycfi { namespace elements
+ 
+ #if defined(__APPLE__)
+       void* _menubar;
++#elif defined(__linux__) || defined(__MINGW32__)
++      GtkApplication* _app;
+ #elif defined(_WIN32)
+       bool  _running = true;
+-#elif defined(__linux__)
+-      GtkApplication* _app;
+ #endif
+ 
+       std::string          _app_name;
+diff --git a/lib/include/elements/base_view.hpp b/lib/include/elements/base_view.hpp
+index 7e6ab58..9565707 100644
+--- a/lib/include/elements/base_view.hpp
++++ b/lib/include/elements/base_view.hpp
+@@ -17,7 +17,7 @@
+ #include <elements/support/point.hpp>
+ #include <elements/support/rect.hpp>
+ 
+-#if defined(_WIN32)
++#if defined(_WIN32) && !defined(__MINGW32__)
+ # include <windows.h>
+ #endif
+ 
+@@ -277,14 +277,14 @@ namespace cycfi { namespace elements
+    // The base view base class
+    ////////////////////////////////////////////////////////////////////////////
+ 
+-#if defined(__APPLE__) || defined(__linux__)
++#if defined(__APPLE__) || defined(__linux__) || defined(__MINGW32__)
+    struct host_view;
+    using host_view_handle = host_view*;
+ #elif defined(_WIN32)
+    using host_view_handle = HWND;
+ #endif
+ 
+-#if defined(__APPLE__) || defined(__linux__)
++#if defined(__APPLE__) || defined(__linux__) || defined(__MINGW32__)
+    struct host_window;
+    using host_window_handle = host_window*;
+ #elif defined(_WIN32)
+@@ -295,7 +295,7 @@ namespace cycfi { namespace elements
+    {
+    public:
+ 
+-#if !defined(_WIN32)
++#if !defined(_WIN32) || defined(__MINGW32__)
+                         base_view(host_view_handle h);
+ #endif
+                         base_view(extent size_);
+diff --git a/lib/include/elements/window.hpp b/lib/include/elements/window.hpp
+index ecff469..200a542 100755
+--- a/lib/include/elements/window.hpp
++++ b/lib/include/elements/window.hpp
+@@ -9,7 +9,7 @@
+ #include <string>
+ #include <functional>
+ 
+-#if defined(_WIN32)
++#if defined(_WIN32) && !defined(__MINGW32__)
+ # include <Windows.h>
+ #endif
+ 
+diff --git a/lib/src/support/font.cpp b/lib/src/support/font.cpp
+index 1863140..ce3db36 100644
+--- a/lib/src/support/font.cpp
++++ b/lib/src/support/font.cpp
+@@ -20,7 +20,7 @@
+ # include FT_OUTLINE_H
+ # include FT_BBOX_H
+ # include FT_TYPE1_TABLES_H
+-# ifdef _WIN32
++# if defined(_WIN32) && !defined(__MINGW32__)
+ #  include <Windows.h>
+ #  include "sysinfoapi.h"
+ #  include "tchar.h"
+@@ -154,7 +154,7 @@ namespace cycfi { namespace elements
+          auto resources_path = get_user_fonts_directory();
+ #else
+          auto resources_path = (fs::current_path() / "resources").generic_string();
+-#ifdef _WIN32
++#if defined(_WIN32) && !defined(__MINGW32__)
+          TCHAR windir[MAX_PATH];
+          GetWindowsDirectory(windir, MAX_PATH);
+          auto fonts_path = (fs::path(windir) / "fonts").generic_string();
